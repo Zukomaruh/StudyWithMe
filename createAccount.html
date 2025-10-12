@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create new Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background-color: #84b015;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    /* Home Button */
+    .home-button {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: text-decoration 0.2s ease;
+    }
+
+    .home-button:hover {
+      text-decoration: underline;
+    }
+
+    /* Form Container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 80px;
+      flex-grow: 1;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-link {
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .login-link a {
+      color: black;
+      text-decoration: underline;
+    }
+
+    form {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+    }
+
+    input:focus, select:focus {
+      border-color: #84b015;
+      outline: none;
+      box-shadow: 0 0 4px rgba(132, 176, 21, 0.5);
+    }
+
+    .privacy {
+      display: flex;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .privacy input {
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .privacy a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    button {
+      background-color: #004080;
+      color: white;
+      padding: 10px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #003060;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #769b12;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="home-button">Home</a>
+  </header>
+
+  <div class="container">
+    <h1>Create new Account</h1>
+    <p class="login-link">Already got an Account? <a href="#">Login</a></p>
+
+    <form>
+      <div>
+        <label for="name">Name</label><br />
+        <input type="text" id="name" placeholder="enter your name..." required />
+      </div>
+
+      <div>
+        <label for="email">FHTW-E-Mail</label><br />
+        <input type="email" id="email" placeholder="enter your email..." required />
+      </div>
+
+      <div>
+        <label for="password">Password</label><br />
+        <input type="password" id="password" placeholder="enter a secure password..." required />
+      </div>
+
+      <div>
+        <label for="course">Course of Study</label><br />
+        <select id="course" required>
+          <option value="">Select</option>
+          <option value="informatics">Informatics</option>
+          <option value="engineering">Engineering</option>
+          <option value="media">Media Technology</option>
+        </select>
+      </div>
+
+      <div class="privacy">
+        <input type="checkbox" id="privacy" required />
+        <label for="privacy">I agree to the <a href="#">Privacy Statement</a></label>
+      </div>
+
+      <button type="submit">REGISTER</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <a href="#">Impressum</a> |
+    <a href="#">Copyright</a>
+  </footer>
+</body>
+</html>
