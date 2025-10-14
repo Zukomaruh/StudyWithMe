@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login to Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fff;
+    }
+
+    /* Header */
+    header {
+      background-color: #769b12;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    .home-button {
+      background-color: #00649c;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .home-button:hover {
+      background-color: #004a75;
+    }
+
+    /* Login Container */
+    .login-container {
+      max-width: 400px;
+      margin: 80px auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-bottom: 30px;
+    }
+
+    a {
+      color: #00649c;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #000;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      font-size: 14px;
+    }
+
+    .forgot-password {
+      text-align: left;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #00649c;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #004a75;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="home-button">Home</a>
+  </header>
+
+  <div class="login-container">
+    <h1>Login to Account</h1>
+    <p>Don’t have an Account? <a href="createAccount.html">Register</a></p>
+
+    <form>
+      <label for="email">FHTW-E-MAIL</label>
+      <input type="email" id="email" name="email" placeholder="enter your email..." required>
+
+      <label for="password">PASSWORD</label>
+      <input type="password" id="password" name="password" placeholder="enter your password..." required>
+
+      <div class="forgot-password">
+        <a href="#">passwort vergessen?</a>
+      </div>
+
+      <button type="submit">LOGIN</button>
+    </form>
+  </div>
+</body>
+</html>
