@@ -1,0 +1,17 @@
+header, footer.text-center.py-3.mt-auto{
+    background-color: #769b12;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+a.text-decoration-none{
+    color: blue;
+}
+
+#regbutton, #logbutton{
+    background-color: #00649c;
+}
+
+#regbutton:hover, #logbutton:hover{
+    background-color: #005080;
+}
