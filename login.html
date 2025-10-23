@@ -4,126 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login to Account</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #fff;
-    }
 
-    /* Header */
-    header {
-      background-color: #769b12;
-      padding: 15px 30px;
-      display: flex;
-      align-items: center;
-    }
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    .home-button {
-      background-color: #00649c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .home-button:hover {
-      background-color: #004a75;
-    }
-
-    /* Login Container */
-    .login-container {
-      max-width: 400px;
-      margin: 80px auto;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    p {
-      margin-bottom: 30px;
-    }
-
-    a {
-      color: #00649c;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
-      color: #000;
-    }
-
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-      font-size: 14px;
-    }
-
-    .forgot-password {
-      text-align: left;
-      font-size: 12px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      background-color: #00649c;
-      color: white;
-      border: none;
-      padding: 10px 30px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #004a75;
-    }
-  </style>
+  <!-- Optional Custom Stylesheet -->
+  <link href="assets/css/styles.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <a href="index.html" class="home-button">Home</a>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Header -->
+  <header class="d-flex align-items-center px-3 site-header py-3">
+    <a href="index.html" class="btn">Home</a>
   </header>
 
-  <div class="login-container">
-    <h1>Login to Account</h1>
-    <p>Don’t have an Account? <a href="createAccount.html">Register</a></p>
+  <!-- Main Login Content -->
+  <main class="container d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
+    <div class="w-100" style="max-width:400px;">
+      <h1 class="text-center">Login to Account</h1>
+      <p class="text-center mb-4">
+        Don’t have an Account?
+        <a href="createAccount.html" class="login-link">Register</a>
+      </p>
 
-    <form>
-      <label for="email">FHTW-E-MAIL</label>
-      <input type="email" id="email" name="email" placeholder="enter your email..." required>
+      <form method="post" action="login.php">
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label text-uppercase small fw-semibold">FHTW-E-Mail</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="enter your email..." required>
+        </div>
 
-      <label for="password">PASSWORD</label>
-      <input type="password" id="password" name="password" placeholder="enter your password..." required>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label text-uppercase small fw-semibold">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="enter your password..." required>
+        </div>
 
-      <div class="forgot-password">
-        <a href="#">passwort vergessen?</a>
-      </div>
+        <!-- Forgot Password -->
+        <div class="text-start mb-4">
+          <a href="#" class="small privacy-link">Forgot password?</a>
+        </div>
 
-      <button type="submit">LOGIN</button>
-    </form>
-  </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn w-100">LOGIN</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-3 mt-auto">
+    <a href="#" class="footer-link">Impressum</a> |
+    <a href="#" class="footer-link">Copyright</a>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

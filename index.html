@@ -8,84 +8,83 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="assets/css/styles.css" rel="stylesheet">
 </head>
-<body>
-    <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #769b12;">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="#">StudyWithMe</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="d-flex flex-column min-vh-100">
 
-                <!-- Sidebar (offcanvas) -->
-                <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbar">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="createAccount.html">Join Now</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Log In</a>
-                    </li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-        </nav>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark site-header">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">StudyWithMe</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Hero Section -->
-        <section class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-start">
-            <h1 class="fw-bold">Study With Me</h1>
-            <p class="lead text-muted mb-4">
-                Connect. Collaborate. Study together — anywhere on campus.
-            </p>
-            <a href="createAccount.html" class="btn btn-primary me-2" style="background-color:#00649c; border:none;">Join Now</a>
-            <a href="login.html" class="btn btn-outline-primary" style="color:#00649c; border-color:#00649c;">Log In</a>
-            </div>
-
-            <div class="col-md-6 text-center mt-4 mt-md-0">
-            <!-- Platzhalter für Handy-Mockup -->
-            <div class="border rounded-4 shadow-sm p-3" style="max-width: 280px; margin:auto;">
-                <div class="ratio ratio-9x16 bg-light d-flex align-items-center justify-content-center">
-                <span class="text-muted">Image Placeholder</span>
-                </div>
-            </div>
-            </div>
+      <!-- Sidebar (offcanvas) -->
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbar">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
-        </section>
-
-        <!-- About Us -->
-        <section class="container py-5">
-        <div class="row align-items-start">
-            <div class="col-md-6">
-            <h6 class="text-uppercase text-muted mb-2">Learn More</h6>
-            <h3 class="fw-bold">About Us</h3>
-            <p class="text-muted">
-                StudyWithMe is a student-driven web application designed to make learning at the University of Applied Sciences Technikum Wien more social and connected. 
-                By allowing students to check in to study rooms, share what they’re working on, and discover who’s studying nearby, we help turn individual studying 
-                into a collaborative campus experience.
-            </p>
-            </div>
-            <div class="col-md-6 text-center mt-4 mt-md-0">
-            <div class="border border-secondary rounded-2 d-inline-block p-4 text-muted">
-                <span>Image Placeholder</span>
-            </div>
-            </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link" href="createAccount.html">Join Now</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Log In</a>
+            </li>
+          </ul>
         </div>
-        </section>
+      </div>
+    </div>
+  </nav>
 
-        <!-- Footer -->
-        <footer class="text-center py-3" style="background-color:#769b12;">
-        <a href="#" class="text-white text-decoration-none me-3">Impressum</a> |
-        <a href="#" class="text-white text-decoration-none ms-3">Copyright</a>
-        </footer>
-    <!-- should stay the last line: -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- Hero Section -->
+  <section class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <h1>Study With Me</h1>
+        <p class="lead mb-4">
+          Connect. Collaborate. Study together — anywhere on campus.
+        </p>
+        <a href="createAccount.html" class="btn">Join Now</a>
+        <a href="login.html" class="btn indexlogin">Log In</a>
+      </div>
+
+      <div class="col-md-6 text-center mt-4 mt-md-0">
+        <div class="placeholder-box border border-secondary rounded-2 d-inline-block p-4 text-muted">
+            <span>Image Placeholder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section class="container about-section py-5">
+    <div class="row align-items-start">
+      <div class="col-md-6">
+        <h6 class="text-uppercase text-muted mb-2">Learn More</h6>
+        <h3>About Us</h3>
+        <p class="text-muted">
+          StudyWithMe is a student-driven web application designed to make learning at the University of Applied Sciences Technikum Wien more social and connected. 
+          By allowing students to check in to study rooms, share what they’re working on, and discover who’s studying nearby, we help turn individual studying 
+          into a collaborative campus experience.
+        </p>
+      </div>
+      <div class="col-md-6 text-center mt-4 mt-md-0">
+        <div class="placeholder-box border border-secondary rounded-2 d-inline-block p-4 text-muted">
+          <span>Image Placeholder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3 mt-auto">
+    <a href="#" class="footer-link me-3">Impressum</a> |
+    <a href="#" class="footer-link ms-3">Copyright</a>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+header, footer{
+    background-color: #769b12;
+}
+
+.btn{
+    color: white;
+    background-color: #00649c;
+}
+
+.btn:hover{
+    color: white;
+    background-color: #185397;
+}
+
+.btn.indexlogin{ /*indexlogin ist der button im index html welcher anders aussieht*/
+    color: #00649c;
+    background-color: white;
+    border: 1px solid #00649c;
+}
+
+.indexlogin:hover {
+  color: white;
+  background-color: #00649c;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
+.btn{
+    font-weight:bold;
+}
+
+h1,h3{
+    font-weight: bolder;
+}
+
+nav{
+    background-color: #769b12;
+}
