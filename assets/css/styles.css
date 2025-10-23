@@ -36,6 +36,6 @@ h1,h3{
     font-weight: bolder;
 }
 
-nav{
+nav, nav.navbar{
     background-color: #769b12;
 }
