@@ -1,17 +1,41 @@
-header, footer.text-center.py-3.mt-auto{
+header, footer{
     background-color: #769b12;
-    padding-top:15px;
-    padding-bottom:15px;
 }
 
-a.text-decoration-none{
-    color: blue;
-}
-
-#regbutton, #logbutton{
+.btn{
+    color: white;
     background-color: #00649c;
 }
 
-#regbutton:hover, #logbutton:hover{
-    background-color: #005080;
+.btn:hover{
+    color: white;
+    background-color: #185397;
+}
+
+.btn.indexlogin{ /*indexlogin ist der button im index html welcher anders aussieht*/
+    color: #00649c;
+    background-color: white;
+    border: 1px solid #00649c;
+}
+
+.indexlogin:hover {
+  color: white;
+  background-color: #00649c;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
+.btn{
+    font-weight:bold;
+}
+
+h1,h3{
+    font-weight: bolder;
+}
+
+nav{
+    background-color: #769b12;
 }
