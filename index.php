@@ -11,31 +11,7 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar -->
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">StudyWithMe</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="createAccount.html">Join Now</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">Log In</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <?php include 'includes/navbar.php' ?>
 
   <!-- Hero Section -->
   <section class="container py-5">
@@ -45,8 +21,8 @@
         <p class="lead mb-4">
           Connect. Collaborate. Study together — anywhere on campus.
         </p>
-        <a href="createAccount.html" class="btn">Join Now</a>
-        <a href="login.html" class="btn indexlogin">Log In</a>
+        <a href="createAccount.php" class="btn">Join Now</a>
+        <a href="login.php" class="btn indexlogin">Log In</a>
       </div>
 
       <div class="col-md-6 text-center mt-4 mt-md-0">
@@ -78,10 +54,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-3 mt-auto">
-    <a href="#" class="footer-link me-3">Impressum</a> |
-    <a href="#" class="footer-link ms-3">Copyright</a>
-  </footer>
+  <?php include 'includes/footer.php'?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -14,9 +14,7 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Header -->
-  <header class="d-flex align-items-center px-3 site-header py-3">
-    <a href="index.html" class="btn">Home</a>
-  </header>
+  <?php include 'includes/navbar.php'?>
 
   <!-- Main Login Content -->
   <main class="container d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
@@ -24,7 +22,7 @@
       <h1 class="text-center">Login to Account</h1>
       <p class="text-center mb-4">
         Don’t have an Account?
-        <a href="createAccount.html" class="login-link">Register</a>
+        <a href="createAccount.php" class="login-link">Register</a>
       </p>
 
       <form method="post" action="login.php">
@@ -52,10 +50,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-3 mt-auto">
-    <a href="#" class="footer-link">Impressum</a> |
-    <a href="#" class="footer-link">Copyright</a>
-  </footer>
+  <?php include 'includes/footer.php'?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

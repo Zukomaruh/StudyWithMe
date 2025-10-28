@@ -13,17 +13,15 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Header -->
-  <header class="d-flex align-items-center px-3 site-header py-3">
-    <a href="index.html" class="btn">Home</a>
-  </header>
+  <!-- Navbar -->
+ <?php include 'includes/navbar.php'?>
 
   <!-- Main Content -->
   <main class="container d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
     <h1>Create new Account</h1>
     <p>
       Already got an Account? 
-      <a href="login.html" class="login-link">Login</a>
+      <a href="login.php" class="login-link">Login</a>
     </p>
 
     <form method="post" action="register.php">
@@ -70,10 +68,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-3 mt-auto">
-    <a href="#" class="footer-link">Impressum</a> |
-    <a href="#" class="footer-link">Copyright</a>
-  </footer>
+  <?php include 'includes/footer.php'?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
