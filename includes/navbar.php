@@ -18,21 +18,23 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <?php if (basename($currentPage) === 'index.php') echo '
           <li class="nav-item">
-            <a class="nav-link <?php if (basename($currentPage) === 'createAccount.php') echo 'active'; ?>" 
-            href="createAccount.php">Join Now</a>
+            <a class="nav-link" href="createAccount.php">Join Now</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if (basename($currentPage) === 'login.php') echo 'active'; ?>" 
-            href="login.php">Log In</a>
+            <a class="nav-link" href="login.php">Log In</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if (basename($currentPage) === 'index.php') echo 'active'; ?>"
-            href="index.php">Home</a>
+            <a class="nav-link" href="campusmap.php">Campus-Map</a>
+          </li>
+        '; ?>
+        <?php if (basename($currentPage) === 'campusmap.php') echo '
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if (basename($currentPage) === 'campusmap.php') echo 'active'; ?>"
-            href="campusmap.php">Campus-Map</a>
+            <a class="nav-link active" href="campusmap.php">Campus-Map</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Dashboard</a>
@@ -40,6 +42,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Logout</a>
           </li>
+        '; ?>
         </ul>
       </div>
     </div>
