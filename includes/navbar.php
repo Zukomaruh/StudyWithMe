@@ -4,15 +4,17 @@
   ?>
 
   <!--nav bar-->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.php">
+  <!--Logo-Homebutton-->
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.php">
         <img
         src="assets/img/StudyWithMe_Logo.png"
         alt="StudyWithMe Logo"
         height="50"
-        class="d-inline-block align-top"
+        class="d-inline-block align-top px-3"
       />
+      <span>StudyWithMe</span>
       </a>
       <button
         class="navbar-toggler"
@@ -25,7 +27,7 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <?php if (basename($currentPage) === 'index.php') echo '
+        <?php if (basename($currentPage) === 'index.php') : ?>
           <li class="nav-item">
             <a class="nav-link" href="createAccount.php">Join Now</a>
           </li>
@@ -35,8 +37,7 @@
           <li class="nav-item">
             <a class="nav-link" href="campusmap.php">Campus-Map</a>
           </li>
-        '; ?>
-        <?php if (basename($currentPage) === 'campusmap.php') echo '
+        <?php else:?>
           <li class="nav-item">
             <a class="nav-link" href="index.php">Home</a>
           </li>
@@ -49,7 +50,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Logout</a>
           </li>
-        '; ?>
+        <?php endif; ?>
         </ul>
       </div>
     </div>
