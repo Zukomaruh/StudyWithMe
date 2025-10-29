@@ -13,36 +13,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">StudyWithMe</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="campusmap.html">Campus-Map</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <?php include 'includes/navbar.php'?>
 
   <!-- Main -->
   <main class="container d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
@@ -65,10 +36,8 @@
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-3 mt-auto">
-    <a href="#" class="footer-link">Impressum</a> |
-    <a href="#" class="footer-link">Copyright</a>
-  </footer>
+  <?php include 'includes/footer.php'?>
+  
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
