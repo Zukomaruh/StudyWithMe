@@ -29,15 +29,16 @@
     </div>
 
     <form class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-      <a href="index.html" class="btn btn-outline-success px-4">B-Building</a>
-      <a href="index.html" class="btn btn-outline-success px-4">A-Building</a>
-      <a href="index.html" class="btn btn-outline-success px-4">F-Building</a>
+      <a href="rooms.php?building=B" class="btn btn-outline-success px-4">B-Building</a>
+      <a href="rooms.php?building=A" class="btn btn-outline-success px-4">A-Building</a>
+      <a href="rooms.php?building=F" class="btn btn-outline-success px-4">F-Building</a>
     </form>
   </main>
 
   <!-- Footer -->
-  <?php include 'includes/footer.php'?>
+    <?php include 'includes/footer.php'?>
   
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>
