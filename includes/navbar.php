@@ -12,7 +12,7 @@
         src="assets/img/StudyWithMe_Logo.png"
         alt="StudyWithMe Logo"
         height="50"
-        class="d-inline-block align-top"
+        class="d-inline-block align-top px-3"
       />
       <span>StudyWithMe</span>
       </a>
