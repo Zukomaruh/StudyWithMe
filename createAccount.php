@@ -58,7 +58,7 @@
       <div class="form-check mb-4">
         <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
         <label for="privacy" class="form-check-label">
-          I agree to the <a href="#" class="privacy-link">Privacy Statement</a>
+          I agree to the <a href="privacystatement.php" class="privacy-link">Privacy Statement</a>
         </label>
       </div>
 
