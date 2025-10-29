@@ -6,7 +6,14 @@
   <!--nav bar-->
     <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.php">StudyWithMe</a>
+      <a class="navbar-brand fw-bold" href="index.php">
+        <img
+        src="assets/img/StudyWithMe_Logo.png"
+        alt="StudyWithMe Logo"
+        height="50"
+        class="d-inline-block align-top"
+      />
+      </a>
       <button
         class="navbar-toggler"
         type="button"
