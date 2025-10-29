@@ -15,16 +15,16 @@ $currentBuilding = isset($_GET['building']) ? strtoupper($_GET['building']) : 'F
     <!-- Jede col nimmt auf kleinen Displays 12 Spalten (volle Breite), 
          und ab mittleren Displays 6 Spalten (also 2 nebeneinander) -->
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">Custom column padding 1</div>
+      <div class="p-3 bg-light border h-100">Image Raumplan</div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">Custom column padding 2</div>
+      <div class="p-3 bg-light border h-100">Room Information</div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">Custom column padding 3</div>
+      <div class="p-3 bg-light border h-100">Choose Floor</div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">Custom column padding 4</div>
+      <div class="p-3 bg-light border h-100">Choose Room</div>
     </div>
   </div>
 </div>
