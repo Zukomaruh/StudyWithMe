@@ -4,9 +4,12 @@
   ?>
 
   <!--nav bar-->
+
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
     <div class="container-fluid">
+
   <!--Logo-Homebutton-->
+  
       <a class="navbar-brand fw-bold d-flex align-items-center" href="index.php">
         <img
         src="assets/img/StudyWithMe_Logo.png"
@@ -25,11 +28,13 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+<!--Zeigt Buttons je nach Seite an-->
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-        <?php if (basename($currentPage) === 'index.php') : ?>
+        <?php if (basename($currentPage) === 'index.php' || basename($currentPage) === 'privacystatement.php') : ?>
           <li class="nav-item">
-            <a class="nav-link" href="createAccount.php">Join Now</a>
+            <a class="nav-link" href="createAccount.php">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.php">Log In</a>
