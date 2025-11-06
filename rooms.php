@@ -69,6 +69,7 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
                   <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1" disabled>5</button>
                   <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
                 <?php endif;?>
+          </form>
             <?php // echo $selectedFloor; ?>
         </div>
     </div></div>
