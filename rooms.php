@@ -11,7 +11,10 @@
 $currentBuilding = isset($_GET['building']) ? strtoupper($_GET['building']) : 'F';
 
 // funktioniert nur wenn wir Raumselection als Formular machen (zB Dropdown oä):
-$selectedFloor = $_POST['floor'] ?? 0; 
+$selectedFloor = $_POST['floor'] ?? 0;
+if($currentBuilding === 'B' && $selectedFloor === 0){
+  $selectedFloor = 2;
+}
 ?>
 <div class="container-fluid text-center py-4">
   <div class="row g-4">
@@ -41,14 +44,32 @@ $selectedFloor = $_POST['floor'] ?? 0;
         <div class="d-flex bg-success text-white rounded-pill p-1">
         <!--Muss noch angepasst werden mit php dass je nach Building andere Floors gezeigt werden sonst hauts hin-->
             <form method="post">
-                <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
-                <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
-                <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
-                <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1">3</button>
-                <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
-                <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1">5</button>
-                <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1">6</button>
-            </form>
+                <?php if($currentBuilding === 'F') : ?>
+                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
+                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
+                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1" disabled>3</button>
+                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1" disabled>5</button>
+                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                <?php elseif($currentBuilding === 'A') : ?>
+                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
+                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
+                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1">3</button>
+                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1">5</button>
+                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                <?php else : ?>
+                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1" disabled>UG</button>
+                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1" disabled>1</button>
+                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1" disabled>3</button>
+                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1" disabled>5</button>
+                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                <?php endif;?>
+          </form>
             <?php // echo $selectedFloor; ?>
         </div>
     </div></div>
