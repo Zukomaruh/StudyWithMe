@@ -1,6 +1,6 @@
   <!--requests current page-->
   <?php
-    $currentPage = $_SERVER['REQUEST_URI'];
+    $currentPage = basename($_SERVER['REQUEST_URI']);
   ?>
 
   <!--nav bar-->
@@ -44,16 +44,16 @@
           </li>
         <?php else:?>
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
+            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?>" href="profile.php">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="campusmap.php">Campus-Map</a>
+            <a class="nav-link <?php if($currentPage === 'campusmap.php'){echo 'active';}?>" href="campusmap.php">Campus-Map</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link <?php if($currentPage === 'dashboard.php'){echo 'active';}?>" href="dashboard.php">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="index.php">Logout</a>
           </li>
         <?php endif; ?>
         </ul>
