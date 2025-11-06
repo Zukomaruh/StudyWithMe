@@ -44,7 +44,10 @@ $selectedFloor = $_POST['floor'] ?? 0;
                 <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
                 <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
                 <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
+                <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1">3</button>
                 <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
+                <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1">5</button>
+                <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1">6</button>
             </form>
             <?php // echo $selectedFloor; ?>
         </div>
