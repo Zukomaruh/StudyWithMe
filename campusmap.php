@@ -29,9 +29,9 @@
     </div>
 
     <form class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-      <a href="rooms.php?building=B" class="btn btn-outline-success px-4">B-Building</a>
-      <a href="rooms.php?building=A" class="btn btn-outline-success px-4">A-Building</a>
-      <a href="rooms.php?building=F" class="btn btn-outline-success px-4">F-Building</a>
+      <a href="rooms.php?building=B" class="btn btn-outline-success px-4 campusmapbtn">B-Building</a>
+      <a href="rooms.php?building=A" class="btn btn-outline-success px-4 campusmapbtn">A-Building</a>
+      <a href="rooms.php?building=F" class="btn btn-outline-success px-4 campusmapbtn">F-Building</a>
     </form>
   </main>
 
