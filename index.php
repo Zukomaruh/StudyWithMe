@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php session_start(); 
+  if($_SESSION["logged_in"]){
+    header("Location: campusmap.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar -->
-  <?php include 'includes/navbar.php' ?>
+  <?php include 'includes/navbar.php'; ?>
 
   <!-- Hero Section -->
   <section class="container py-5">

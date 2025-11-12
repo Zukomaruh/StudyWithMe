@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -43,6 +44,11 @@
         <input type="password" id="password" name="password" class="form-control" placeholder="enter a secure password..." required>
       </div>
 
+      <div class="mb-3">
+        <label for="password" class="form-label text-uppercase small fw-semibold">Confirm Password</label>
+        <input type="password" id="password" name="passwordConfirm" class="form-control" placeholder="re-enter password..." required>
+      </div>
+
       <!-- Course -->
       <div class="mb-3">
         <label for="course" class="form-label text-uppercase small fw-semibold">Course of Study</label>
@@ -62,6 +68,12 @@
         </label>
       </div>
 
+      <?php if(isset($_SESSION["error"])): ?>
+        <div class="text-center mb-4">
+          <p style='color:red'><?php echo $_SESSION["error"] ?></p>
+        </div>
+      <?php endif; ?>
+
       <!-- Submit Button -->
       <button type="submit" class="btn w-100">REGISTER</button>
     </form>
@@ -69,6 +81,8 @@
 
   <!-- Footer -->
   <?php include 'includes/footer.php'?>
+
+  <?php unset($_SESSION["error"]) ?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
