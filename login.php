@@ -44,11 +44,11 @@
           <a href="#" class="small privacy-link">Forgot password?</a>
         </div>
 
-        <?php if(isset($_SESSION["error"])) ?>
+        <?php if(isset($_SESSION["error"])): ?>
         <div class="text-center mb-4">
           <p style='color:red'><?php echo $_SESSION["error"] ?></p>
         </div>
-        
+        <?php endif; ?>
         <!-- Submit Button -->
         <button type="submit" class="btn w-100">LOGIN</button>
       </form>
@@ -57,6 +57,8 @@
 
   <!-- Footer -->
   <?php include 'includes/footer.php'?>
+
+  <?php unset($_SESSION["error"]) ?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -39,9 +39,9 @@
           <li class="nav-item">
             <a class="nav-link" href="login.php">Log In</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="campusmap.php">Campus-Map</a>
-          </li>
+          <!-- <li class="nav-item"> -->
+            <!-- <a class="nav-link" href="campusmap.php">Campus-Map</a> -->
+          <!-- </li> -->
         <?php else:?>
           <li class="nav-item">
             <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?>" href="profile.php">Profile</a>
