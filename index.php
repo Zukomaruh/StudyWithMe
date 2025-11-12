@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +27,7 @@
       </div>
 
       <div class="col-md-6 text-center mt-4 mt-md-0">
-        <div class="placeholder-box border border-secondary rounded-2 d-inline-block p-4 text-muted">
-            <span>Image Placeholder</span>
-        </div>
+            <img src="assets/img/FHTW_HeroSection.png" alt="FH Technikum Wien" class="img-fluid mx-auto d-block">
       </div>
     </div>
   </section>
@@ -46,9 +45,7 @@
         </p>
       </div>
       <div class="col-md-6 text-center mt-4 mt-md-0">
-        <div class="placeholder-box border border-secondary rounded-2 d-inline-block p-4 text-muted">
-          <span>Image Placeholder</span>
-        </div>
+          <img src="assets/img/RoomPage_HeroSection.png" alt="Room Page Demo" class="img-fluid mx-auto d-block">
       </div>
     </div>
   </section>
