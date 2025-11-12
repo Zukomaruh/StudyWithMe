@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $name = "";
     $email = "";
     $password="";
@@ -8,11 +9,11 @@
     $success = "";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $name = trim($_POST["name"] ?? ""); //trimmed eingabe, und weist "" zu falls nicht gesetzt
-        $email = trim($_POST["email"] ?? "");
-        $password = trim($_POST["password"] ?? "");
-        $course = trim($_POST["course"] ?? "");
-        $privacy = $_POST["privacy"];
+        $name = htmlspecialchars(trim($_POST["name"]) ?? ""); //trimmed eingabe, und weist "" zu falls nicht gesetzt
+        $email = htmlspecialchars(trim($_POST["email"]) ?? "");
+        $password = htmlspecialchars(trim($_POST["password"]) ?? "");
+        $course = htmlspecialchars(trim($_POST["course"]) ?? "");
+        $privacy = htmlspecialchars($_POST["privacy"]);
 
         if ($name === "") {
             $errors[] = "First name is required.";

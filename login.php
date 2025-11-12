@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -25,7 +26,7 @@
         <a href="createAccount.php" class="login-link">Register</a>
       </p>
 
-      <form method="post" action="logindata.php">
+      <form method="post" action="logic/logindata.php">
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label text-uppercase small fw-semibold">FHTW-E-Mail</label>
@@ -43,6 +44,11 @@
           <a href="#" class="small privacy-link">Forgot password?</a>
         </div>
 
+        <?php if(isset($_SESSION["error"])) ?>
+        <div class="text-center mb-4">
+          <p style='color:red'><?php echo $_SESSION["error"] ?></p>
+        </div>
+        
         <!-- Submit Button -->
         <button type="submit" class="btn w-100">LOGIN</button>
       </form>

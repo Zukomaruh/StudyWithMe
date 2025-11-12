@@ -24,7 +24,7 @@
       <a href="login.php" class="login-link">Login</a>
     </p>
 
-    <form method="post" action="register.php">
+    <form method="post" action="logic/registrationdata.php">
       <!-- Name -->
       <div>
         <label for="name" class="form-label text-uppercase small fw-semibold">Name</label>
