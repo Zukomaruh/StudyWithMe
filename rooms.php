@@ -30,84 +30,81 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
       />
       </div>
     </div>
-    <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">
-        <h3>Room Information</h3>
-        <?php if (empty($selectedRoom)) : ?>
-          <p>please pick a room...</p>
-        <?php endif; ?>
+    <div class="col-12 col-md-6"> 
+      <div class="p-3 bg-light border h-100"> <!--leeres widget-->
+        <?php $selectedRoom = "A4" ?> 
+        <!-- hier kommt später dann rein, was über den Button ausgewählt wurde -->
+
+        <h3 style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">Room Information</h3>
+        <p style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">please pick a room...</p>
+
         <div class="container py-4">
-        <div class="room-widget mx-auto p-4 rounded shadow-sm">
-          <h3 class="fw-bold text-center mb-3">Room Details</h3>
+          
+            <h3 class="fw-bold text-center mb-3" style="display:none">Room Details</h3>
 
-          <div class="text-center mb-3">
-            <p class="mb-0 small text-muted">ROOM</p>
-            <h2 class="fw-bold text-room">F4.24</h2>
-            <div class="room-bar mx-auto"></div>
-          </div>
+            <div class="text-center mb-3">
+              <p class="mb-0 small text-muted">ROOM</p>
+              <h2 class="fw-bold text-room">F4.24</h2>
+              <div class="room-bar mx-auto"></div>
+            </div>
 
-          <!-- Active Users in Room -->
-          <div class="room-userlist p-3 mb-4 rounded">
-            <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-              <div class="d-flex align-items-center">
-                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                <span class="fw-semibold">Max Mustermann</span>
+            <!-- Active Users in Room -->
+            <div class="room-userlist p-3 mb-4 rounded">
+
+              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+                <div class="d-flex align-items-center">
+                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                  <span class="fw-semibold">Max Mustermann</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="time me-2">37:24</span>
+                  <span class="subject-tag">REQEN</span>
+                </div>
               </div>
+
+              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+                <div class="d-flex align-items-center">
+                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                  <span class="fw-semibold">Toni Justus</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="time me-2">25:23</span>
+                  <span class="subject-tag">AWS</span>
+                </div>
+              </div>
+
+              <div class="room-user d-flex justify-content-between align-items-center p-2 rounded">
+                <div class="d-flex align-items-center">
+                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                  <span class="fw-semibold">Alice Bob</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="time me-2">24:54</span>
+                  <span class="subject-tag">AWS</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Subject Input -->
+            <div class="mb-3">
+              <label for="subject" class="form-label fw-semibold">Subject</label>
+              <input type="text" id="subject" class="form-control rounded-pill" placeholder="Input...">
+            </div>
+
+            <!-- Study Session Controls -->
+            <div class="study-session p-3 mb-3 rounded d-flex justify-content-between align-items-center">
+              <span class="fw-semibold">Study-Session</span>
               <div class="d-flex align-items-center">
-                <span class="time me-2">37:24</span>
-                <span class="subject-tag">REQEN</span>
+                <span class="me-2 text-muted">60:00</span>
+                <div class="toggle-off"></div>
               </div>
             </div>
 
-            <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-              <div class="d-flex align-items-center">
-                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                <span class="fw-semibold">Toni Justus</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <span class="time me-2">25:23</span>
-                <span class="subject-tag">AWS</span>
-              </div>
-            </div>
-
-            <div class="room-user d-flex justify-content-between align-items-center p-2 rounded">
-              <div class="d-flex align-items-center">
-                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                <span class="fw-semibold">Alice Bob</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <span class="time me-2">24:54</span>
-                <span class="subject-tag">AWS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Subject Input -->
-          <div class="mb-3">
-            <label for="subject" class="form-label fw-semibold">Subject</label>
-            <input type="text" id="subject" class="form-control rounded-pill" placeholder="Input...">
-          </div>
-
-          <!-- Study Session Controls -->
-          <div class="study-session p-3 mb-3 rounded d-flex justify-content-between align-items-center">
-            <span class="fw-semibold">Study-Session</span>
-            <div class="d-flex align-items-center">
-              <span class="me-2 text-muted">60:00</span>
-              <div class="toggle-off"></div>
-            </div>
-          </div>
-
-          <div class="study-session p-3 rounded d-flex justify-content-between align-items-center">
-            <span class="fw-semibold">Study-Session</span>
-            <div class="d-flex align-items-center">
-              <span class="me-2">37:28</span>
-              <div class="toggle-on"></div>
-            </div>
-          </div>
+          
         </div>
-        </div>
-      </div>
-    </div>
+      </div><!-- leeres widget ende-->
+    </div> 
     <div class="col-12 col-md-6">
       <div class="p-3 bg-light border h-100">
         <div class="d-flex flex-column align-items-center">

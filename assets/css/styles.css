@@ -72,11 +72,9 @@ nav, nav.navbar{
 }
 /*-----rooms info widget---------*/
 .room-widget {
-  background-color: #ffffff;
+  background-color: white;
   border: 2px solid #000;
   border-radius: 16px;
-  max-width: 450px;
-  height: 70vh; /* ca. 2/3 der Seitenhöhe */
 }
 
 /* Room Header */
@@ -146,7 +144,7 @@ nav, nav.navbar{
 }
 
 .room-widget {
-  transform: scale(0.65);
+  transform: scale(0.6);
   transform-origin: top center;
   max-width: 400px;
   height: 60vh;
