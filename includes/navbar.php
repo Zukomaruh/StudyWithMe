@@ -53,7 +53,7 @@
             <a class="nav-link <?php if($currentPage === 'dashboard.php'){echo 'active';}?>" href="dashboard.php">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Logout</a>
+            <a class="nav-link" href="logic/logout.php">Logout</a>
           </li>
         <?php endif; ?>
         </ul>
