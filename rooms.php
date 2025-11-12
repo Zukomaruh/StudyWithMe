@@ -36,46 +36,125 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
         <?php if (empty($selectedRoom)) : ?>
           <p>please pick a room...</p>
         <?php endif; ?>
+        <div class="container py-4">
+        <div class="room-widget mx-auto p-4 rounded shadow-sm">
+          <h3 class="fw-bold text-center mb-3">Room Details</h3>
+
+          <div class="text-center mb-3">
+            <p class="mb-0 small text-muted">ROOM</p>
+            <h2 class="fw-bold text-room">F4.24</h2>
+            <div class="room-bar mx-auto"></div>
+          </div>
+
+          <!-- Active Users in Room -->
+          <div class="room-userlist p-3 mb-4 rounded">
+            <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+              <div class="d-flex align-items-center">
+                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                <span class="fw-semibold">Max Mustermann</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="time me-2">37:24</span>
+                <span class="subject-tag">REQEN</span>
+              </div>
+            </div>
+
+            <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+              <div class="d-flex align-items-center">
+                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                <span class="fw-semibold">Toni Justus</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="time me-2">25:23</span>
+                <span class="subject-tag">AWS</span>
+              </div>
+            </div>
+
+            <div class="room-user d-flex justify-content-between align-items-center p-2 rounded">
+              <div class="d-flex align-items-center">
+                <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                <span class="fw-semibold">Alice Bob</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="time me-2">24:54</span>
+                <span class="subject-tag">AWS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subject Input -->
+          <div class="mb-3">
+            <label for="subject" class="form-label fw-semibold">Subject</label>
+            <input type="text" id="subject" class="form-control rounded-pill" placeholder="Input...">
+          </div>
+
+          <!-- Study Session Controls -->
+          <div class="study-session p-3 mb-3 rounded d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">Study-Session</span>
+            <div class="d-flex align-items-center">
+              <span class="me-2 text-muted">60:00</span>
+              <div class="toggle-off"></div>
+            </div>
+          </div>
+
+          <div class="study-session p-3 rounded d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">Study-Session</span>
+            <div class="d-flex align-items-center">
+              <span class="me-2">37:28</span>
+              <div class="toggle-on"></div>
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100"><div class="d-flex flex-column align-items-center">
+      <div class="p-3 bg-light border h-100">
+        <div class="d-flex flex-column align-items-center">
         <h5 class="mb-3">Pick a floor</h5>
-        <div class="d-flex bg-success text-white rounded-pill p-1">
+        <div class="d-flex floorbtnbar text-white rounded-pill p-1">
         <!--Muss noch angepasst werden mit php dass je nach Building andere Floors gezeigt werden sonst hauts hin-->
             <form method="post">
                 <?php if($currentBuilding === 'F') : ?>
-                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
-                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
-                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
-                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1" disabled>3</button>
-                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
-                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1" disabled>5</button>
-                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                  <button type="submit" name="floor" value="0" class="btn actvbtn rounded-pill mx-1">UG</button>
+                  <button type="submit" name="floor" value="1" class="btn actvbtn rounded-pill mx-1">1</button>
+                  <button type="submit" name="floor" value="2" class="btn actvbtn rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn actvbtn rounded-pill mx-1" disabled>3</button>
+                  <button type="submit" name="floor" value="4" class="btn actvbtn rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn actvbtn rounded-pill mx-1" disabled>5</button>
+                  <button type="submit" name="floor" value="6" class="btn actvbtn rounded-pill mx-1" disabled>6</button>
                 <?php elseif($currentBuilding === 'A') : ?>
-                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1">UG</button>
-                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1">1</button>
-                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
-                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1">3</button>
-                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
-                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1">5</button>
-                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                  <button type="submit" name="floor" value="0" class="btn actvbtn rounded-pill mx-1">UG</button>
+                  <button type="submit" name="floor" value="1" class="btn actvbtn rounded-pill mx-1">1</button>
+                  <button type="submit" name="floor" value="2" class="btn actvbtn rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn actvbtn rounded-pill mx-1">3</button>
+                  <button type="submit" name="floor" value="4" class="btn actvbtn rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn actvbtn rounded-pill mx-1">5</button>
+                  <button type="submit" name="floor" value="6" class="btn actvbtn rounded-pill mx-1">6</button>
                 <?php else : ?>
-                  <button type="submit" name="floor" value="0" class="btn btn-success rounded-pill mx-1" disabled>UG</button>
-                  <button type="submit" name="floor" value="1" class="btn btn-success rounded-pill mx-1" disabled>1</button>
-                  <button type="submit" name="floor" value="2" class="btn btn-success rounded-pill mx-1">2</button>
-                  <button type="submit" name="floor" value="3" class="btn btn-success rounded-pill mx-1" disabled>3</button>
-                  <button type="submit" name="floor" value="4" class="btn btn-success rounded-pill mx-1">4</button>
-                  <button type="submit" name="floor" value="5" class="btn btn-success rounded-pill mx-1" disabled>5</button>
-                  <button type="submit" name="floor" value="6" class="btn btn-success rounded-pill mx-1" disabled>6</button>
+                  <button type="submit" name="floor" value="0" class="btn actvbtn rounded-pill mx-1" disabled>UG</button>
+                  <button type="submit" name="floor" value="1" class="btn actvbtn rounded-pill mx-1" disabled>1</button>
+                  <button type="submit" name="floor" value="2" class="btn actvbtn rounded-pill mx-1">2</button>
+                  <button type="submit" name="floor" value="3" class="btn actvbtn rounded-pill mx-1" disabled>3</button>
+                  <button type="submit" name="floor" value="4" class="btn actvbtn rounded-pill mx-1">4</button>
+                  <button type="submit" name="floor" value="5" class="btn actvbtn rounded-pill mx-1" disabled>5</button>
+                  <button type="submit" name="floor" value="6" class="btn actvbtn rounded-pill mx-1" disabled>6</button>
                 <?php endif;?>
           </form>
             <?php // echo $selectedFloor; ?>
         </div>
-    </div></div>
+        </div>
+      </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="p-3 bg-light border h-100">Choose Room</div>
+      <div class="p-3 bg-light border h-100">
+        <h5>choose room</h5>
+        <div class="d-flex roombar text-white rounded-pill p-1">
+              <div class="text-center">
+                    <span class="bg-tag">F0.01</span>
+              </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

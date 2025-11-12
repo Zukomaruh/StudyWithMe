@@ -25,7 +25,7 @@
         <a href="createAccount.php" class="login-link">Register</a>
       </p>
 
-      <form method="post" action="login.php">
+      <form method="post" action="logindata.php">
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label text-uppercase small fw-semibold">FHTW-E-Mail</label>
