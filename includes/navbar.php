@@ -1,5 +1,6 @@
   <!--requests current page-->
   <?php
+    session_start();
     $currentPage = basename($_SERVER['REQUEST_URI']);
   ?>
 
@@ -32,7 +33,8 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-        <?php if (basename($currentPage) === 'index.php' || basename($currentPage) === 'privacystatement.php') : ?>
+        <?php if (basename($currentPage) === 'index.php' 
+        or basename($currentPage) === 'privacystatement.php') : ?>
           <li class="nav-item">
             <a class="nav-link" href="createAccount.php">Register</a>
           </li>
@@ -42,15 +44,20 @@
           <!-- <li class="nav-item"> -->
             <!-- <a class="nav-link" href="campusmap.php">Campus-Map</a> -->
           <!-- </li> -->
+        <?php elseif(basename($currentPage) === 'createAccount.php'
+        or basename($currentPage) === 'login.php') : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Back</a>
+          </li>
         <?php else:?>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?>" href="profile.php">Profile</a>
+            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?> <?php if($_SESSION['guest']){echo 'disabled';}?>" href="profile.php">Profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php if($currentPage === 'campusmap.php'){echo 'active';}?>" href="campusmap.php">Campus-Map</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'dashboard.php'){echo 'active';}?>" href="dashboard.php">Dashboard</a>
+            <a class="nav-link <?php if($currentPage === 'dashboard.php'){echo 'active';}?> <?php if($_SESSION['guest']){echo 'disabled';}?>" href="dashboard.php">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="logic/logout.php">Logout</a>
