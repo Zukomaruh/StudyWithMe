@@ -1,6 +1,8 @@
   <!--requests current page-->
   <?php
-    session_start();
+    if(session_status() === PHP_SESSION_NONE){
+      session_start();
+    }
     $currentPage = basename($_SERVER['REQUEST_URI']);
   ?>
 
