@@ -28,6 +28,7 @@
         </p>
         <a href="createAccount.php" class="btn">Join Now</a>
         <a href="login.php" class="btn indexlogin">Log In</a>
+        <a href="logic/loginguest.php" class="btn">Visit as Guest</a>
       </div>
 
       <div class="col-md-6 text-center mt-4 mt-md-0">
