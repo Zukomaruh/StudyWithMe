@@ -53,7 +53,7 @@
           </li>
         <?php else:?>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?> " href="profile.php">Profile</a>
+            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?> <?php if($_SESSION['guest']){echo 'disabled';}?>" href="profile.php">Profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php if($currentPage === 'campusmap.php'){echo 'active';}?>" href="campusmap.php">Campus-Map</a>
