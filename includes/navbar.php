@@ -65,6 +65,8 @@
             <a class="nav-link" href="logic/logout.php">Logout</a>
           </li>
         <?php endif; ?>
+          <!-- Displays session info, only for debbuging: -->
+          <!--<?php echo "<pre>" . print_r($_SESSION, true) . "</pre>";?>-->
         </ul>
       </div>
     </div>
