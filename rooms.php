@@ -27,6 +27,11 @@
     } else {
         $selectedFloor = 0;
     }
+
+    // Sonderregel Gebäude B (startet nicht bei 0)
+    if ($currentBuilding === 'B' && $selectedFloor == 0) {
+        $selectedFloor = 2;
+    }
   ?>
 
 <div class="container-fluid text-center py-4">
