@@ -17,6 +17,6 @@ function getRoomNameById($db_obj, $roomId) {
     // Raumnummer mit führender Null, falls kleiner 10
     $roomNumberStr = $roomNumber < 10 ? "0" . $roomNumber : $roomNumber;
 
-    // Zusammensetzen: F4.24 oder F4.07
+    // Zusammensetzen
     return $building . $floor . "." . $roomNumberStr;
 }

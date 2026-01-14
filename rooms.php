@@ -7,16 +7,28 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?> 
-<?php
-// Gebäude aus URL-Parameter lesen (Standard: F)
-$currentBuilding = isset($_GET['building']) ? strtoupper($_GET['building']) : 'F';
 
-// funktioniert nur wenn wir Raumselection als Formular machen (zB Dropdown oä):
-$selectedFloor = $_POST['floor'] ?? 0;
-if($currentBuilding === 'B' && $selectedFloor === 0){
-  $selectedFloor = 2;
-}
-?>
+  <?php
+  //hier soll möglich gemacht werden, building und floor über get UND post zu setzen
+   // Gebäude
+    if (isset($_POST['building'])) {
+        $currentBuilding = strtoupper($_POST['building']);
+    } elseif (isset($_GET['building'])) {
+        $currentBuilding = strtoupper($_GET['building']);
+    } else {
+        $currentBuilding = 'F';
+    }
+
+    // Floor (POST hat Vorrang!)
+    if (isset($_POST['floor'])) {
+        $selectedFloor = (int) $_POST['floor'];
+    } elseif (isset($_GET['floor'])) {
+        $selectedFloor = (int) $_GET['floor'];
+    } else {
+        $selectedFloor = 0;
+    }
+  ?>
+
 <div class="container-fluid text-center py-4">
   <div class="row g-4">
     <!-- Jede col nimmt auf kleinen Displays 12 Spalten (volle Breite), 
@@ -155,7 +167,6 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
         <div class="d-flex roombar text-white rounded-pill p-1">
               <div class="text-center">
                     <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
-                      <!-- hier das dropdown -->
                        <?php
                         require_once "logic/database/dbaccess.php";
 
@@ -174,6 +185,10 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
                        <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
                         <?php while ($room = $result->fetch_assoc()): ?>
                           <form method="get" class="me-2 mb-2">
+
+                            <input type="hidden" name="building" value="<?= $currentBuilding ?>">
+                            <input type="hidden" name="floor" value="<?= $selectedFloor ?>">
+
                             <button
                               type="submit"
                               name="room_id"
