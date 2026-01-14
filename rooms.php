@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,7 +149,38 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
         <h5>choose room</h5>
         <div class="d-flex roombar text-white rounded-pill p-1">
               <div class="text-center">
-                    <span class="bg-tag">F0.01</span>
+                    <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
+                      <!-- hier das dropdown -->
+                       <?php
+                        require_once "logic/database/dbaccess.php";
+
+                        $sql = "
+                          SELECT id, room_number
+                          FROM rooms
+                          WHERE building = ?
+                          AND floor = ?
+                        ";
+
+                        $stmt = $db_obj->prepare($sql);
+                        $stmt->bind_param("si", $currentBuilding, $selectedFloor);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                       ?>
+                       <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
+                        <?php while ($room = $result->fetch_assoc()): ?>
+                          <form method="get" class="me-2 mb-2">
+                            <button
+                              type="submit"
+                              name="room_id"
+                              value="<?= $room['id'] ?>"
+                              class="bg-tag"
+                            >
+                              <?= $currentBuilding . $selectedFloor . '.' . str_pad($room['room_number'], 2, '0', STR_PAD_LEFT) ?>
+                            </button>
+                          </form>
+                        <?php endwhile; ?>
+                      </div>
+                    </div>
               </div>
         </div>
       </div>

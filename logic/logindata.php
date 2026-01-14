@@ -31,7 +31,7 @@
     $stmt->execute();
     $stmt->store_result();
 
-    // Kein User mit dieser Email
+    //Kein User mit dieser Email
     if ($stmt->num_rows === 0) {
         sendErrorMessage("There is no account with the email " . htmlspecialchars($email));
     }
