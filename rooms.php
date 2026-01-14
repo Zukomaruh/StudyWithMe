@@ -33,11 +33,11 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
     </div>
     <div class="col-12 col-md-6"> 
       <div class="p-3 bg-light border h-100"> <!--leeres widget-->
-        <?php $selectedRoom = "A4" ?> 
+        <?php $selectedRoomId = $_GET['room_id'] ?? null; ?>
         <!-- hier kommt später dann rein, was über den Button ausgewählt wurde -->
 
-        <h3 style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">Room Information</h3>
-        <p style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">please pick a room...</p>
+        <h3 style="<?= empty($selectedRoomId) ? '' : 'display:none;' ?>">Room Information</h3>
+        <p style="<?= empty($selectedRoomId) ? '' : 'display:none;' ?>">please pick a room...</p>
 
         <div class="container py-4">
           
@@ -45,7 +45,12 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
 
             <div class="text-center mb-3">
               <p class="mb-0 small text-muted">ROOM</p>
-              <h2 class="fw-bold text-room">F4.24</h2>
+              <!-- die raumid in namen umwandeln über ausgelagerte function-->
+                <?php
+                  require_once "logic/functions.php"; // Datei mit getRoomNameById()
+                  $roomName = getRoomNameById($db_obj, $selectedRoomId);
+                ?>
+              <h2 class="fw-bold text-room"><?php echo htmlspecialchars($roomName); ?></h2>
               <div class="room-bar mx-auto"></div>
             </div>
 
