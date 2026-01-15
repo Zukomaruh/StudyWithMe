@@ -2,6 +2,7 @@
 <?php
     session_start();
     require_once "../logic/database/dbaccess.php"; // DB-Zugang
+    require_once "../logic/functions.php"; //Functions-Zugriff
 
     $email = "";
     $password="";
@@ -45,13 +46,19 @@
         sendErrorMessage("Invalid password");
     }
 
-    //------Statement und DB schließen-----
+    //------Statement schließen-----
     $stmt->close();
+
+    
+
+    //----user ID holen für study_session---
+    $userId = getUserIdByEmail($db_obj, $email);
+
+    //------DB schließen-----
     $db_obj->close();
 
-
     $_SESSION["logged_in"] = true;
-    //$_SESSION["user_name"] = $name;
+    $_SESSION['user_id'] = $userId;
     header("Location: ../campusmap.php");
     exit;
 ?>

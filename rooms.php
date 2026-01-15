@@ -109,20 +109,44 @@
 
             </div>
 
-            <!-- Subject Input -->
-            <div class="mb-3">
-              <label for="subject" class="form-label fw-semibold">Subject</label>
-              <input type="text" id="subject" class="form-control rounded-pill" placeholder="Input...">
-            </div>
+            <form action="logic/start_study_session.php" method="post">
 
-            <!-- Study Session Controls -->
-            <div class="study-session p-3 mb-3 rounded d-flex justify-content-between align-items-center">
-              <span class="fw-semibold">Study-Session</span>
-              <div class="d-flex align-items-center">
-                <span class="me-2 text-muted">60:00</span>
-                <div class="toggle-off"></div>
+              <!-- Subject Input -->
+              <div class="mb-3">
+                  <label for="subject" class="form-label fw-semibold">Subject</label>
+                  <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      class="form-control rounded-pill"
+                      placeholder="Input..."
+                      <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
+                  >
               </div>
-            </div>
+
+              <!-- Study Session Controls -->
+              <div class="studysessionstart p-3 mb-3 rounded d-flex justify-content-between align-items-center border">
+
+                  <input type="hidden" name="room_id" value="<?= $selectedRoomId ?>">
+
+                  <span class="fw-semibold">Study-Session</span>
+
+                  <div class="d-flex align-items-center gap-3">
+                      <span class="text-muted">60:00</span>
+
+                      <button
+                          type="submit"
+                          name="start_session"
+                          class="btn btn-outline-success"
+                          <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
+                      >
+                          Start
+                      </button>
+                  </div>
+
+              </div>
+
+          </form>
 
           
         </div>

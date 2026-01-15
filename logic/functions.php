@@ -20,3 +20,50 @@ function getRoomNameById($db_obj, $roomId) {
     // Zusammensetzen
     return $building . $floor . "." . $roomNumberStr;
 }
+
+function getUserIdByEmail(mysqli $db_obj, string $email): int {
+    $stmt = $db_obj->prepare("SELECT user_id FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($userId);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $userId;
+}
+
+function startStudySession(
+    mysqli $db_obj,
+    int $userId,
+    int $roomId,
+    string $subject
+): void {
+
+    // Check: läuft schon eine Session?
+    $stmt = $db_obj->prepare("
+        SELECT session_id
+        FROM study_sessions
+        WHERE user_id = ?
+          AND end_time IS NULL
+    ");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->close();
+        return;
+    }
+    $stmt->close();
+
+    // Neue Session starten
+    $stmt = $db_obj->prepare("
+        INSERT INTO study_sessions (user_id, room_id, subject, start_time)
+        VALUES (?, ?, ?, NOW())
+    ");
+    $stmt->bind_param("iis", $userId, $roomId, $subject);
+    $stmt->execute();
+    $stmt->close();
+}
+
+?>
