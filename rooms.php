@@ -137,7 +137,7 @@
                       <button
                           type="submit"
                           name="start_session"
-                          class="btn btn-outline-success"
+                          class="btn"
                           <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
                       >
                           Start
