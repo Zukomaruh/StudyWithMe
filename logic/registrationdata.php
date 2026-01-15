@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once "../logic/database/dbaccess.php";
+    require_once "../logic/functions.php"; //Functions-Zugriff
 
     $name = "";
     $email = "";
@@ -70,11 +71,15 @@
 
     //Statement und DB schließen
     $stmt->close();
+
+    //----user ID holen für study_session---
+    $userId = getUserIdByEmail($db_obj, $email);
+
     $db_obj->close();
 
     //------Weiterleiten & Session--------
     $_SESSION["logged_in"] = true;
-    //$_SESSION["user_name"] = $name;
+    $_SESSION['user_id'] = $userId;
     header("Location: ../campusmap.php");
     exit;
 ?>
