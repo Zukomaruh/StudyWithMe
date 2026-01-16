@@ -105,7 +105,7 @@ function checkRunningSession(mysqli $db_obj, int $userId): void {
     $hasResult = $stmt->fetch(); // TRUE, wenn eine Zeile zurückkommt
     $stmt->close();
 
-    //try
+    //this makes maintaining the study_session with a red stop button possible after logout/login
     $_SESSION['study_session_active'] = true;
 
     // Wenn letzte Session existiert und beendet ist (end_time nicht NULL) -> Session-Variablen zurücksetzen
