@@ -86,6 +86,10 @@ nav, nav.navbar{
   background-color: red;
 }
 
+.startsession{
+  background-color: #769b12;
+}
+
 /* Room Header */
 .text-room {
   color: #769b12;

@@ -139,7 +139,7 @@
                       <button
                           type="submit"
                           name="start_session"
-                          class="btn <?= $sessionActive ? 'd-none' : '' ?>"
+                          class="btn startsession"
                           <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
                           <?= !empty($_SESSION['study_session_active']) ? 'hidden' : ''?>
                       >
