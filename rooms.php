@@ -2,7 +2,7 @@
 require_once "logic/functions.php";
 require_once "logic/database/dbaccess.php";
 closeExpiredStudySessions($db_obj);
-checkRunningSession($db_obj, $_SESSION['user_id'])
+checkRunningSession($db_obj, $_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
