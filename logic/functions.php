@@ -83,7 +83,7 @@ function closeExpiredStudySessions(mysqli $db_obj): void {
         UPDATE study_sessions
         SET end_time = NOW()
         WHERE end_time IS NULL
-          AND start_time <= (NOW() - INTERVAL 1 MINUTE)
+          AND start_time <= (NOW() - INTERVAL 60 MINUTE)
     ");
     $stmt->execute();
     $stmt->close();
