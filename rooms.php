@@ -8,6 +8,7 @@
 <body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?> 
 
+<?// $sessionActive = !empty($_SESSION['study_session_active']); ?>  
   <?php
   //hier soll möglich gemacht werden, building und floor über get UND post zu setzen
    // Gebäude
@@ -109,8 +110,7 @@
 
             </div>
 
-            <form action="logic/start_study_session.php" method="post">
-
+            <form action="<?= empty($_SESSION['study_session_active'])? 'logic/start_study_session.php': 'logic/stop_study_session.php' ?>" method="post">
               <!-- Subject Input -->
               <div class="mb-3">
                   <label for="subject" class="form-label fw-semibold">Subject</label>
@@ -120,7 +120,7 @@
                       name="subject"
                       class="form-control rounded-pill"
                       placeholder="Input..."
-                      <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
+                      <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) || !empty($_SESSION['study_session_active']) ? 'disabled' : '' ?>
                   >
               </div>
 
@@ -139,17 +139,26 @@
                       <button
                           type="submit"
                           name="start_session"
-                          class="btn"
+                          class="btn <?= $sessionActive ? 'd-none' : '' ?>"
                           <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
+                          <?= !empty($_SESSION['study_session_active']) ? 'hidden' : ''?>
                       >
                           Start
+                      </button>
+                      <button
+                          type="submit"
+                          class="btn stopsession"
+                          <?= empty($_SESSION['logged_in']) ? 'disabled' : '' ?>
+                          <?= empty($_SESSION['study_session_active']) ? 'hidden' : ''?>
+                      >
+                          Stop
                       </button>
                   </div>
 
               </div>
 
           </form>
-
+          
           
         </div>
       </div><!-- leeres widget ende-->

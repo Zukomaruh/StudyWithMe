@@ -66,4 +66,16 @@ function startStudySession(
     $stmt->close();
 }
 
+function stopStudySession(mysqli $db_obj, int $userId): void {
+    $stmt = $db_obj->prepare("
+        UPDATE study_sessions
+        SET end_time = NOW()
+        WHERE user_id = ?
+          AND end_time IS NULL
+    ");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->close();
+}
+
 ?>

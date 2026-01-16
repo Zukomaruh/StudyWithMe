@@ -35,5 +35,8 @@ $building = $_POST['building'];
 $floor    = $_POST['floor'];
 $roomId   = $_POST['room_id'];
 
+$_SESSION['study_session_active'] = true;
+$_SESSION['active_room_id'] = $roomId;
+
 header("Location: ../rooms.php?building=$building&floor=$floor&room_id=$roomId");
 exit;

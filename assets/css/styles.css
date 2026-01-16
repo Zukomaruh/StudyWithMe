@@ -82,7 +82,9 @@ nav, nav.navbar{
   background-color: #e7eed9;
 }
 
-
+.stopsession{
+  background-color: red;
+}
 
 /* Room Header */
 .text-room {
