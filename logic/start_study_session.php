@@ -40,3 +40,4 @@ $_SESSION['active_room_id'] = $roomId;
 
 header("Location: ../rooms.php?building=$building&floor=$floor&room_id=$roomId");
 exit;
+?>

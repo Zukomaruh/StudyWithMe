@@ -1,6 +1,7 @@
 <?php session_start();
 require_once "logic/functions.php";
 require_once "logic/database/dbaccess.php";
+redirectIllegalSiteVisit();
 closeExpiredStudySessions($db_obj);
 //check because of guest
 if(!empty($_SESSION['logged_in'])){
@@ -190,7 +191,7 @@ if(!empty($_SESSION['logged_in'])){
         <div class="d-flex flex-column align-items-center">
         <h5 class="mb-3">Pick a floor</h5>
         <div class="d-flex floorbtnbar text-white rounded-pill p-1">
-        <!--Muss noch angepasst werden mit php dass je nach Building andere Floors gezeigt werden sonst hauts hin-->
+        <!--Wenn Zeit ist verschönern:-->
             <form method="post">
                 <?php if($currentBuilding === 'F') : ?>
                   <button type="submit" name="floor" value="0" class="btn actvbtn rounded-pill mx-1">UG</button>
@@ -218,7 +219,7 @@ if(!empty($_SESSION['logged_in'])){
                   <button type="submit" name="floor" value="6" class="btn actvbtn rounded-pill mx-1" disabled>6</button>
                 <?php endif;?>
           </form>
-            <?php // echo $selectedFloor; ?>
+            <?php // echo $selectedFloor; //for debugging?>
         </div>
         </div>
       </div>
