@@ -128,6 +128,8 @@
               <div class="studysessionstart p-3 mb-3 rounded d-flex justify-content-between align-items-center border">
 
                   <input type="hidden" name="room_id" value="<?= $selectedRoomId ?>">
+                  <input type="hidden" name="building" value="<?= $currentBuilding ?>">
+                  <input type="hidden" name="floor" value="<?= $selectedFloor ?>">
 
                   <span class="fw-semibold">Study-Session</span>
 

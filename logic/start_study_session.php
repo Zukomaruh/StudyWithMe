@@ -31,5 +31,9 @@ if (isset($_POST['start_session'])) {
     startStudySession($db_obj, $userId, $roomId, $subject);
 }
 
-header("Location: ../rooms.php");
+$building = $_POST['building'];
+$floor    = $_POST['floor'];
+$roomId   = $_POST['room_id'];
+
+header("Location: ../rooms.php?building=$building&floor=$floor&room_id=$roomId");
 exit;
