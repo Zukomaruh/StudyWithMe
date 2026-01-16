@@ -78,4 +78,37 @@ function stopStudySession(mysqli $db_obj, int $userId): void {
     $stmt->close();
 }
 
+function closeExpiredStudySessions(mysqli $db_obj): void {
+    $stmt = $db_obj->prepare("
+        UPDATE study_sessions
+        SET end_time = NOW()
+        WHERE end_time IS NULL
+          AND start_time <= (NOW() - INTERVAL 60 MINUTE)
+    ");
+    $stmt->execute();
+    $stmt->close();
+}
+
+function checkRunningSession(mysqli $db_obj, int $userId): void {
+    // SQL: die letzte Session des Users abrufen
+    $stmt = $db_obj->prepare("
+        SELECT end_time 
+        FROM study_sessions 
+        WHERE user_id = ? 
+        ORDER BY start_time DESC 
+        LIMIT 1
+    ");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($endTime);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Wenn letzte Session beendet ist (end_time nicht NULL) -> Session-Variablen zurücksetzen
+    if ($endTime !== null) {
+        $_SESSION['study_session_active'] = false;
+        unset($_SESSION['active_room_id']);
+    }
+}
+
 ?>

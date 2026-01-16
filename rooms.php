@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once "logic/functions.php";
+require_once "logic/database/dbaccess.php";
+closeExpiredStudySessions($db_obj);
+checkRunningSession($db_obj, $_SESSION['user_id'])
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +12,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?> 
-
-<?// $sessionActive = !empty($_SESSION['study_session_active']); ?>  
+ 
   <?php
   //hier soll möglich gemacht werden, building und floor über get UND post zu setzen
    // Gebäude
@@ -65,7 +69,6 @@
               <p class="mb-0 small text-muted">ROOM</p>
               <!-- die raumid in namen umwandeln über ausgelagerte function-->
                 <?php
-                  require_once "logic/functions.php"; // Datei mit getRoomNameById()
                   $roomName = getRoomNameById($db_obj, $selectedRoomId);
                 ?>
               <h2 class="fw-bold text-room"><?php echo htmlspecialchars($roomName); ?></h2>
@@ -208,7 +211,6 @@
               <div class="text-center">
                     <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
                        <?php
-                        require_once "logic/database/dbaccess.php";
 
                         $sql = "
                           SELECT id, room_number
