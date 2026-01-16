@@ -81,38 +81,47 @@ if(!empty($_SESSION['logged_in'])){
             <!-- Active Users in Room -->
             <div class="room-userlist p-3 mb-4 rounded">
 
-              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Max Mustermann</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">37:24</span>
-                  <span class="subject-tag">REQEN</span>
-                </div>
-              </div>
+              <?php
+                // SQL: alle aktiven Sessions in einem Raum holen
+                $stmt = $db_obj->prepare("
+                    SELECT u.name, s.subject, TIMEDIFF(NOW(), s.start_time) AS duration
+                    FROM study_sessions s
+                    JOIN users u ON s.user_id = u.user_id
+                    WHERE s.room_id = ? AND s.end_time IS NULL
+                    ORDER BY s.start_time ASC
+                ");
+                $stmt->bind_param("i", $selectedRoomId);
+                $stmt->execute();
+                $stmt->bind_result($userName, $subject, $duration);
 
-              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Toni Justus</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">25:23</span>
-                  <span class="subject-tag">AWS</span>
-                </div>
-              </div>
+                // HTML-Wrapper für die scrollable Liste
+                echo '<div class="room-userlist p-3 mb-4 rounded" style="max-height:400px; overflow-y:auto;">';
 
-              <div class="room-user d-flex justify-content-between align-items-center p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Alice Bob</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">24:54</span>
-                  <span class="subject-tag">AWS</span>
-                </div>
-              </div>
+                // Schleife über alle aktiven Sessions
+                while ($stmt->fetch()) {
+                    // duration formatieren: Stunden/Minuten/Sekunden
+                    $timeParts = explode(":", $duration); // "HH:MM:SS"
+                    $timeFormatted = sprintf("%02d:%02d", $timeParts[1], $timeParts[2]);
+
+                    // HTML-Block pro User
+                    echo '
+                    <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                            <span class="fw-semibold">' . htmlspecialchars($userName) . '</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="time me-2">' . $timeFormatted . '</span>
+                            <span class="subject-tag">' . htmlspecialchars($subject) . '</span>
+                        </div>
+                    </div>
+                    ';
+                }
+
+                echo '</div>'; // close wrapper
+
+                $stmt->close();
+              ?>
 
             </div>
 
