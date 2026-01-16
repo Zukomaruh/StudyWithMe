@@ -54,9 +54,21 @@
         <label for="course" class="form-label text-uppercase small fw-semibold">Course of Study</label>
         <select id="course" name="course" class="form-select" required>
           <option value="">Select</option>
-          <option value="informatics">Informatics</option>
-          <option value="engineering">Engineering</option>
-          <option value="media">Media Technology</option>
+          <option value="Biomedical Engineering">Biomedical Engineering</option>
+          <option value="Elektronik Embedded & Cyber Physical Systems">Elektronik Embedded & Cyber Physical Systems</option>
+          <option value="Elektronik Power Electronics & Nachhaltige Energietechnik">Elektronik Power Electronics & Nachhaltige Energietechnik</option>
+          <option value="Elektronik Wirtschaft & Entrepreneurship">Elektronik Wirtschaft & Entrepreneurship</option>
+          <option value="Elektronik IoT & Smart Infrastructure">Elektronik IoT & Smart Infrastructure</option>
+          <option value="Erneuerbare Energien">Erneuerbare Energien</option>
+          <option value="Human Factors and Sports Engineering">Human Factors and Sports Engineering</option>
+          <option value="Informatik">Informatik</option>
+          <option value="Informations- und Kommunikationssysteme">Informations- und Kommunikationssysteme</option>
+          <option value="Internationales Wirtschaftsingenieurwesen">Internationales Wirtschaftsingenieurwesen</option>
+          <option value="Maschinenbau">Maschinenbau</option>
+          <option value="Mechatronik und Robotik">Mechatronik und Robotik</option>
+          <option value="Nachhaltige Umwelt- und Bioprozesstechnik">Nachhaltige Umwelt- und Bioprozesstechnik</option>
+          <option value="Wasserstofftechnik">Wasserstofftechnik</option>
+          <option value="Wirtschaftsinformatik">Wirtschaftsinformatik</option>
         </select>
       </div>
 

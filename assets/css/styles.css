@@ -77,6 +77,19 @@ nav, nav.navbar{
   border-radius: 16px;
 }
 
+/*startbutton*/
+.studysessionstart {
+  background-color: #e7eed9;
+}
+
+.stopsession{
+  background-color: red;
+}
+
+.startsession{
+  background-color: #769b12;
+}
+
 /* Room Header */
 .text-room {
   color: #769b12;
@@ -189,3 +202,4 @@ nav, nav.navbar{
   font-size: 0.8rem;
   font-weight: bold;
 }
+

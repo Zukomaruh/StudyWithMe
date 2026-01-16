@@ -1,3 +1,11 @@
+<?php session_start();
+require_once "logic/functions.php";
+require_once "logic/database/dbaccess.php";
+closeExpiredStudySessions($db_obj);
+if(!empty($_SESSION['logged_in'])){
+  checkRunningSession($db_obj, $_SESSION['user_id']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,24 +20,75 @@
             <span class="status-dot ms-2"></span>
         </h1>
 
-        <!-- Example Course Section -->
-        <section class="course-section p-3 rounded">
-            <h5 class="fw-semibold mb-3">Business and Computer Science</h5>
+        <?php
+            // Dashboard: Alle aktiven Sessions nach Studiengang mit Laufzeit
 
-            <!-- User List -->
-            <div class="user-entry d-flex align-items-center justify-content-between mb-2 p-2 rounded">
-                <div class="d-flex align-items-center">
-                    <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="profile-pic me-2">
-                    <span class="fw-semibold">Konrad Grossinger</span>
-                </div>
-                <div class="text-center">
-                    <span class="subject-tag">REQEN</span>
-                </div>
-                <div>
-                    <span class="fw-semibold">F4.24</span>
-                </div>
-            </div>
-        </section>
+            // 1. SQL: Alle aktiven Sessions mit User-Infos holen
+            $sql = "
+                SELECT 
+                    u.name AS user_name, 
+                    u.course AS user_course, 
+                    s.subject, 
+                    s.start_time,
+                    r.building, 
+                    r.floor, 
+                    r.room_number
+                FROM study_sessions s
+                JOIN users u ON s.user_id = u.user_id
+                JOIN rooms r ON s.room_id = r.id
+                WHERE s.end_time IS NULL
+                ORDER BY u.course, s.start_time ASC
+            ";
+
+            $result = $db_obj->query($sql);
+
+            // 2. Sessions nach Studiengang gruppieren
+            $activeSessions = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $course = $row['user_course'];
+                if (!isset($activeSessions[$course])) {
+                    $activeSessions[$course] = [];
+                }
+                $activeSessions[$course][] = $row;
+            }
+
+            // 3. HTML ausgeben
+            foreach ($activeSessions as $course => $sessions) {
+                ?>
+                <section class="course-section p-3 rounded">
+                    <h5 class="fw-semibold mb-3"><?= htmlspecialchars($course) ?></h5>
+
+                    <?php foreach ($sessions as $session): 
+                        // Raumname zusammensetzen, führende 0 für Raumnummer < 10
+                        $roomNumber = str_pad($session['room_number'], 2, "0", STR_PAD_LEFT);
+                        $roomName = htmlspecialchars($session['building'] . $session['floor'] . "." . $roomNumber);
+
+                        // Laufzeit berechnen
+                        $start = new DateTime($session['start_time']);
+                        $now = new DateTime();
+                        $interval = $start->diff($now);
+                        $elapsedTime = sprintf('%02d:%02d', $interval->h*60 + $interval->i, $interval->s);
+                    ?>
+                    <div class="user-entry d-flex align-items-center justify-content-between mb-2 p-2 rounded">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="profile-pic me-2">
+                            <span class="fw-semibold"><?= htmlspecialchars($session['user_name']) ?></span>
+                        </div>
+                        <div class="text-center">
+                            <span class="subject-tag"><?= htmlspecialchars($session['subject']) ?></span>
+                        </div>
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-semibold"><?= $roomName ?></span>
+                            <span class="text-muted"><?= $elapsedTime ?></span>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </section>
+                <?php
+            }
+            ?>
+        
     </main>
     <?php include 'includes/footer.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once "logic/functions.php";
+require_once "logic/database/dbaccess.php";
+closeExpiredStudySessions($db_obj);
+if(!empty($_SESSION['logged_in'])){
+  checkRunningSession($db_obj, $_SESSION['user_id']);
+}
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>

@@ -1,3 +1,12 @@
+<?php session_start();
+require_once "logic/functions.php";
+require_once "logic/database/dbaccess.php";
+closeExpiredStudySessions($db_obj);
+//check because of guest
+if(!empty($_SESSION['logged_in'])){
+  checkRunningSession($db_obj, $_SESSION['user_id']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +15,33 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?> 
-<?php
-// Gebäude aus URL-Parameter lesen (Standard: F)
-$currentBuilding = isset($_GET['building']) ? strtoupper($_GET['building']) : 'F';
+ 
+  <?php
+  //hier soll möglich gemacht werden, building und floor über get UND post zu setzen
+   // Gebäude
+    if (isset($_POST['building'])) {
+        $currentBuilding = strtoupper($_POST['building']);
+    } elseif (isset($_GET['building'])) {
+        $currentBuilding = strtoupper($_GET['building']);
+    } else {
+        $currentBuilding = 'F';
+    }
 
-// funktioniert nur wenn wir Raumselection als Formular machen (zB Dropdown oä):
-$selectedFloor = $_POST['floor'] ?? 0;
-if($currentBuilding === 'B' && $selectedFloor === 0){
-  $selectedFloor = 2;
-}
-?>
+    // Floor (POST hat Vorrang!)
+    if (isset($_POST['floor'])) {
+        $selectedFloor = (int) $_POST['floor'];
+    } elseif (isset($_GET['floor'])) {
+        $selectedFloor = (int) $_GET['floor'];
+    } else {
+        $selectedFloor = 0;
+    }
+
+    // Sonderregel Gebäude B (startet nicht bei 0)
+    if ($currentBuilding === 'B' && $selectedFloor == 0) {
+        $selectedFloor = 2;
+    }
+  ?>
+
 <div class="container-fluid text-center py-4">
   <div class="row g-4">
     <!-- Jede col nimmt auf kleinen Displays 12 Spalten (volle Breite), 
@@ -32,11 +58,11 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
     </div>
     <div class="col-12 col-md-6"> 
       <div class="p-3 bg-light border h-100"> <!--leeres widget-->
-        <?php $selectedRoom = "A4" ?> 
+        <?php $selectedRoomId = $_GET['room_id'] ?? null; ?>
         <!-- hier kommt später dann rein, was über den Button ausgewählt wurde -->
 
-        <h3 style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">Room Information</h3>
-        <p style="<?= empty($selectedRoom) ? '' : 'display:none;' ?>">please pick a room...</p>
+        <h3 style="<?= empty($selectedRoomId) ? '' : 'display:none;' ?>">Room Information</h3>
+        <p style="<?= empty($selectedRoomId) ? '' : 'display:none;' ?>">please pick a room...</p>
 
         <div class="container py-4">
           
@@ -44,63 +70,117 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
 
             <div class="text-center mb-3">
               <p class="mb-0 small text-muted">ROOM</p>
-              <h2 class="fw-bold text-room">F4.24</h2>
+              <!-- die raumid in namen umwandeln über ausgelagerte function-->
+                <?php
+                  $roomName = getRoomNameById($db_obj, $selectedRoomId);
+                ?>
+              <h2 class="fw-bold text-room"><?php echo htmlspecialchars($roomName); ?></h2>
               <div class="room-bar mx-auto"></div>
             </div>
 
             <!-- Active Users in Room -->
             <div class="room-userlist p-3 mb-4 rounded">
 
-              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Max Mustermann</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">37:24</span>
-                  <span class="subject-tag">REQEN</span>
-                </div>
-              </div>
+              <?php
+                //später vllt in functions auslagern!
+                // SQL: alle aktiven Sessions in einem Raum holen
+                $stmt = $db_obj->prepare("
+                    SELECT u.name, s.subject, TIMEDIFF(NOW(), s.start_time) AS duration
+                    FROM study_sessions s
+                    JOIN users u ON s.user_id = u.user_id
+                    WHERE s.room_id = ? AND s.end_time IS NULL
+                    ORDER BY s.start_time ASC
+                ");
+                $stmt->bind_param("i", $selectedRoomId);
+                $stmt->execute();
+                $stmt->bind_result($userName, $subject, $duration);
 
-              <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Toni Justus</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">25:23</span>
-                  <span class="subject-tag">AWS</span>
-                </div>
-              </div>
+                // HTML-Wrapper für die scrollable Liste
+                echo '<div class="room-userlist p-3 mb-4 rounded" style="max-height:400px; overflow-y:auto;">';
 
-              <div class="room-user d-flex justify-content-between align-items-center p-2 rounded">
-                <div class="d-flex align-items-center">
-                  <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
-                  <span class="fw-semibold">Alice Bob</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <span class="time me-2">24:54</span>
-                  <span class="subject-tag">AWS</span>
-                </div>
-              </div>
+                // Schleife über alle aktiven Sessions
+                while ($stmt->fetch()) {
+                    // duration formatieren: Stunden/Minuten/Sekunden
+                    $timeParts = explode(":", $duration); // "HH:MM:SS"
+                    $timeFormatted = sprintf("%02d:%02d", $timeParts[1], $timeParts[2]);
+
+                    // HTML-Block pro User
+                    echo '
+                    <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                            <span class="fw-semibold">' . htmlspecialchars($userName) . '</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="time me-2">' . $timeFormatted . '</span>
+                            <span class="subject-tag">' . htmlspecialchars($subject) . '</span>
+                        </div>
+                    </div>
+                    ';
+                }
+
+                echo '</div>'; // close wrapper
+
+                $stmt->close();
+              ?>
 
             </div>
 
-            <!-- Subject Input -->
-            <div class="mb-3">
-              <label for="subject" class="form-label fw-semibold">Subject</label>
-              <input type="text" id="subject" class="form-control rounded-pill" placeholder="Input...">
-            </div>
-
-            <!-- Study Session Controls -->
-            <div class="study-session p-3 mb-3 rounded d-flex justify-content-between align-items-center">
-              <span class="fw-semibold">Study-Session</span>
-              <div class="d-flex align-items-center">
-                <span class="me-2 text-muted">60:00</span>
-                <div class="toggle-off"></div>
+            <form action="<?= empty($_SESSION['study_session_active'])? 'logic/start_study_session.php': 'logic/stop_study_session.php' ?>" method="post">
+              <!-- Subject Input -->
+              <div class="mb-3">
+                  <label for="subject" class="form-label fw-semibold">Subject</label>
+                  <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      class="form-control rounded-pill"
+                      placeholder="Input..."
+                      <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) || !empty($_SESSION['study_session_active']) ? 'disabled' : '' ?>
+                  >
               </div>
-            </div>
 
+              <!-- Study Session Controls -->
+              <div class="studysessionstart p-3 mb-3 rounded d-flex justify-content-between align-items-center border">
+
+                  <input type="hidden" name="room_id" value="<?= $selectedRoomId ?>">
+                  <input type="hidden" name="building" value="<?= $currentBuilding ?>">
+                  <input type="hidden" name="floor" value="<?= $selectedFloor ?>">
+
+                  <span class="fw-semibold">Study-Session</span>
+
+                  <div class="d-flex align-items-center gap-3">
+                      <?php if (!empty($_SESSION['user_id'])): ?>
+                          <span class="text-muted">
+                              <?= htmlspecialchars(getRemainingStudyTime($db_obj, $_SESSION['user_id'])) ?>
+                          </span>
+                      <?php else: ?>
+                          <span class="text-muted">60:00</span> <!-- Default für Gäste -->
+                      <?php endif; ?>
+
+                      <button
+                          type="submit"
+                          name="start_session"
+                          class="btn startsession"
+                          <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) ? 'disabled' : '' ?>
+                          <?= !empty($_SESSION['study_session_active']) ? 'hidden' : ''?>
+                      >
+                          Start
+                      </button>
+                      <button
+                          type="submit"
+                          class="btn stopsession"
+                          <?= empty($_SESSION['logged_in']) ? 'disabled' : '' ?>
+                          <?= empty($_SESSION['study_session_active']) ? 'hidden' : ''?>
+                      >
+                          Stop
+                      </button>
+                  </div>
+
+              </div>
+
+          </form>
+          
           
         </div>
       </div><!-- leeres widget ende-->
@@ -148,7 +228,40 @@ if($currentBuilding === 'B' && $selectedFloor === 0){
         <h5>choose room</h5>
         <div class="d-flex roombar text-white rounded-pill p-1">
               <div class="text-center">
-                    <span class="bg-tag">F0.01</span>
+                    <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
+                       <?php
+
+                        $sql = "
+                          SELECT id, room_number
+                          FROM rooms
+                          WHERE building = ?
+                          AND floor = ?
+                        ";
+
+                        $stmt = $db_obj->prepare($sql);
+                        $stmt->bind_param("si", $currentBuilding, $selectedFloor);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                       ?>
+                       <div class="d-flex roombar text-white rounded-pill p-1 flex-wrap">
+                        <?php while ($room = $result->fetch_assoc()): ?>
+                          <form method="get" class="me-2 mb-2">
+
+                            <input type="hidden" name="building" value="<?= $currentBuilding ?>">
+                            <input type="hidden" name="floor" value="<?= $selectedFloor ?>">
+
+                            <button
+                              type="submit"
+                              name="room_id"
+                              value="<?= $room['id'] ?>"
+                              class="bg-tag"
+                            >
+                              <?= $currentBuilding . $selectedFloor . '.' . str_pad($room['room_number'], 2, '0', STR_PAD_LEFT) ?>
+                            </button>
+                          </form>
+                        <?php endwhile; ?>
+                      </div>
+                    </div>
               </div>
         </div>
       </div>
