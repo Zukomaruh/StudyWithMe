@@ -83,12 +83,13 @@ function closeExpiredStudySessions(mysqli $db_obj): void {
         UPDATE study_sessions
         SET end_time = NOW()
         WHERE end_time IS NULL
-          AND start_time <= (NOW() - INTERVAL 60 MINUTE)
+          AND start_time <= (NOW() - INTERVAL 1 MINUTE)
     ");
     $stmt->execute();
     $stmt->close();
 }
 
+//implentiert, weil button rot bleibt wenn session aufgrund von zeit beendet wird!
 function checkRunningSession(mysqli $db_obj, int $userId): void {
     // SQL: die letzte Session des Users abrufen
     $stmt = $db_obj->prepare("
