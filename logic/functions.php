@@ -105,6 +105,9 @@ function checkRunningSession(mysqli $db_obj, int $userId): void {
     $stmt->fetch();
     $stmt->close();
 
+    //notwendig wenn man sich während einer laufenden session aus und wieder einloggt
+    $_SESSION['study_session_active'] = true;
+
     // Wenn letzte Session beendet ist (end_time nicht NULL) -> Session-Variablen zurücksetzen
     if ($endTime !== null) {
         $_SESSION['study_session_active'] = false;

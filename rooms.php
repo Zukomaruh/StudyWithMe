@@ -150,9 +150,13 @@ if(!empty($_SESSION['logged_in'])){
                   <span class="fw-semibold">Study-Session</span>
 
                   <div class="d-flex align-items-center gap-3">
-                      <span class="text-muted">
-                      <?= htmlspecialchars(getRemainingStudyTime($db_obj, $_SESSION['user_id'])) ?>
-                      </span>
+                      <?php if (!empty($_SESSION['user_id'])): ?>
+                          <span class="text-muted">
+                              <?= htmlspecialchars(getRemainingStudyTime($db_obj, $_SESSION['user_id'])) ?>
+                          </span>
+                      <?php else: ?>
+                          <span class="text-muted">60:00</span> <!-- Default für Gäste -->
+                      <?php endif; ?>
 
                       <button
                           type="submit"
