@@ -82,6 +82,7 @@ if(!empty($_SESSION['logged_in'])){
             <div class="room-userlist p-3 mb-4 rounded">
 
               <?php
+                //später vllt in functions auslagern!
                 // SQL: alle aktiven Sessions in einem Raum holen
                 $stmt = $db_obj->prepare("
                     SELECT u.name, s.subject, TIMEDIFF(NOW(), s.start_time) AS duration
@@ -149,7 +150,9 @@ if(!empty($_SESSION['logged_in'])){
                   <span class="fw-semibold">Study-Session</span>
 
                   <div class="d-flex align-items-center gap-3">
-                      <span class="text-muted">60:00</span>
+                      <span class="text-muted">
+                      <?= htmlspecialchars(getRemainingStudyTime($db_obj, $_SESSION['user_id'])) ?>
+                      </span>
 
                       <button
                           type="submit"

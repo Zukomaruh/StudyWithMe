@@ -112,4 +112,36 @@ function checkRunningSession(mysqli $db_obj, int $userId): void {
     }
 }
 
+function getRemainingStudyTime(mysqli $db_obj, int $userId): string {
+    // SQL: aktiven Session starten
+    $stmt = $db_obj->prepare("
+        SELECT start_time 
+        FROM study_sessions 
+        WHERE user_id = ? AND end_time IS NULL
+        ORDER BY start_time DESC
+        LIMIT 1
+    ");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($startTime);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (!$startTime) {
+        return "60:00"; // default, falls keine aktive Session
+    }
+
+    $sessionStart = new DateTime($startTime);
+    $now = new DateTime();
+    $elapsed = $now->getTimestamp() - $sessionStart->getTimestamp();
+
+    $maxSeconds = 60 * 60; // 60 Minuten in Sekunden
+    $remaining = max($maxSeconds - $elapsed, 0);
+
+    $minutes = floor($remaining / 60);
+    $seconds = $remaining % 60;
+
+    return sprintf("%02d:%02d", $minutes, $seconds);
+}
+
 ?>
