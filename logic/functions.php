@@ -89,7 +89,6 @@ function closeExpiredStudySessions(mysqli $db_obj): void {
     $stmt->close();
 }
 
-//implentiert, weil button rot bleibt wenn session aufgrund von zeit beendet wird!
 function checkRunningSession(mysqli $db_obj, int $userId): void {
     // SQL: die letzte Session des Users abrufen
     $stmt = $db_obj->prepare("
@@ -102,14 +101,20 @@ function checkRunningSession(mysqli $db_obj, int $userId): void {
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $stmt->bind_result($endTime);
-    $stmt->fetch();
+
+    $hasResult = $stmt->fetch(); // TRUE, wenn eine Zeile zurückkommt
     $stmt->close();
 
-    //notwendig wenn man sich während einer laufenden session aus und wieder einloggt
+    //try
     $_SESSION['study_session_active'] = true;
 
-    // Wenn letzte Session beendet ist (end_time nicht NULL) -> Session-Variablen zurücksetzen
-    if ($endTime !== null) {
+    // Wenn letzte Session existiert und beendet ist (end_time nicht NULL) -> Session-Variablen zurücksetzen
+    if ($hasResult && $endTime !== null) {
+        $_SESSION['study_session_active'] = false;
+        unset($_SESSION['active_room_id']);
+    }
+    // Optional: Wenn keine Session existiert, Session-Variablen auch auf false setzen
+    elseif (!$hasResult) {
         $_SESSION['study_session_active'] = false;
         unset($_SESSION['active_room_id']);
     }
