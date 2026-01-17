@@ -26,3 +26,4 @@ $roomId   = $_POST['room_id'];
 header("Location: ../rooms.php?building=$building&floor=$floor&room_id=$roomId");
 //header("Location: ../campusmap.php");
 exit;
+?>
