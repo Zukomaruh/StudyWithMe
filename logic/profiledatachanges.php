@@ -26,19 +26,21 @@ if (isset($_POST["submit"])) {
             mkdir($target_dir, 0777, true);
         }
 
-        //ALTES PROFILBILD LÖSCHEN
-        if (!empty($user_data['profile_pic']) && file_exists($user_data['profile_pic'])) {
-            unlink($user_data['profile_pic']);
-        }
+        if(in_array()){
+            //ALTES PROFILBILD LÖSCHEN
+            if (!empty($user_data['profile_pic']) && file_exists($user_data['profile_pic'])) {
+                unlink($user_data['profile_pic']);
+            }
 
-        //DATEI SPEICHERN
-        if (move_uploaded_file($file["tmp_name"], $target_file)) {
-            $stmt = $db_obj->prepare(
-                "UPDATE users SET profile_pic = ? WHERE user_id = ?"
-            );
-            $stmt->bind_param("si", $target_file, $userId);
-            $stmt->execute();
-            $stmt->close();
+            //DATEI SPEICHERN
+            if (move_uploaded_file($file["tmp_name"], $target_file)) {
+                $stmt = $db_obj->prepare(
+                    "UPDATE users SET profile_pic = ? WHERE user_id = ?"
+                );
+                $stmt->bind_param("si", $target_file, $userId);
+                $stmt->execute();
+                $stmt->close();
+            }
         }
     }
 
