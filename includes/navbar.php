@@ -70,7 +70,7 @@
             href="dashboard.php">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="logic/logout.php">Logout</a>
+            <a class="nav-link" href="logic/logout.php"><?= !empty($_SESSION['guest']) ? 'Back' : 'Logout' ?></a>
           </li>
         <?php endif; ?>
           <!-- Displays session info, only for debbuging: -->
