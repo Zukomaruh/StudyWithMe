@@ -152,4 +152,24 @@ function getRemainingStudyTime(mysqli $db_obj, int $userId): string {
     return sprintf("%02d:%02d", $minutes, $seconds);
 }
 
+function stopStudySessionBySessionId(mysqli $db, int $sessionId): void
+{
+    $sql = "
+        UPDATE study_sessions
+        SET end_time = NOW()
+        WHERE session_id = ?
+          AND end_time IS NULL
+        LIMIT 1
+    ";
+
+    $stmt = $db->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $db->error);
+    }
+
+    $stmt->bind_param("i", $sessionId);
+    $stmt->execute();
+    $stmt->close();
+}
+
 ?>
