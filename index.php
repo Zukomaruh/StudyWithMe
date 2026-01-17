@@ -1,5 +1,5 @@
 <?php session_start(); 
-  if(isset($_SESSION["logged_in"])){
+  if(isset($_SESSION["logged_in"]) || isset($_SESSION["guest"])){
     header("Location: campusmap.php");
   }
 ?>

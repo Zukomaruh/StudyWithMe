@@ -5,6 +5,9 @@ redirectIllegalSiteVisit();
 closeExpiredStudySessions($db_obj);
 if(!empty($_SESSION['logged_in'])){
   checkRunningSession($db_obj, $_SESSION['user_id']);
+}else{
+    header("Location: index.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
