@@ -7,7 +7,7 @@
         //prepare filename for upload
         $date = new DateTime();
         $timestamp = $date->getTimestamp();
-        $target_dir = 'assets/uploads/';
+        $target_dir = '../assets/uploads/';
         $file = $_FILES["profilePicture"];
         $picname = explode(".", @$_FILES["profilePicture"]["name"]);
         $target_file = $target_dir .
