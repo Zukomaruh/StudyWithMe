@@ -53,21 +53,29 @@
           </li>
         <?php else:?>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'profile.php'){echo 'active';}?>" href="profile.php">Profile</a>
+            <a class="nav-link 
+            <?php if($currentPage === 'profile.php'){echo 'active';}
+            if(!empty($_SESSION['guest'])) echo ' disabled';?>" 
+            href="profile.php">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'campusmap.php'){echo 'active';}?>" href="campusmap.php">Campus-Map</a>
+            <a class="nav-link 
+            <?php if($currentPage === 'campusmap.php'){echo 'active';}?>" 
+            href="campusmap.php">Campus-Map</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php if($currentPage === 'dashboard.php'){echo 'active';}?>" href="dashboard.php">Dashboard</a>
+            <a class="nav-link 
+            <?php if($currentPage === 'dashboard.php'){echo 'active';}
+            if(!empty($_SESSION['guest'])) echo ' disabled';?>" 
+            href="dashboard.php">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="logic/logout.php">Logout</a>
           </li>
         <?php endif; ?>
           <!-- Displays session info, only for debbuging: -->
-          <?php echo "<pre>" . print_r($_SESSION, true) . "</pre>";
-                echo "only for debbuging"
+          <?php //echo "<pre>" . print_r($_SESSION, true) . "</pre>";
+                //echo "only for debbuging"
           ?>
         </ul>
       </div>

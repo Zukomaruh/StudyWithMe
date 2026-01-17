@@ -172,4 +172,29 @@ function stopStudySessionBySessionId(mysqli $db, int $sessionId): void
     $stmt->close();
 }
 
+function redirectIllegalSiteVisit() {
+    if(!$_SESSION['logged_in'] && !$_SESSION['guest']){
+        header("Location: index.php");
+        exit;
+    }
+}
+
+function getUSerData(mysqli $db_obj, int $user_id): array{
+    $sql = "
+        SELECT name, email, course
+        FROM users
+        WHERE user_id = ?
+    ";
+    $stmt = $db_obj->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $user = $stmt->get_result();
+    if ($user->num_rows > 0){
+        $user_data = $user->fetch_assoc();
+    }
+    $stmt->close();
+
+    return $user_data ?: ['name' => '', 'email' => '', 'course' => ''];
+}
+
 ?>
