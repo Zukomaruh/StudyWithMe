@@ -27,14 +27,24 @@ if(!empty($_SESSION['logged_in'])){
         <!-- Profile Picture -->
         <div class="mb-4">
             <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="rounded-circle mb-3 img-fluid" style="max-width: 150px;">
-            <div>
-            <label for="profilePicture" class="form-label fw-semibold">Change Profile Picture</label>
-            <input type="file" id="profilePicture" name="profilePicture" class="form-control">
-            </div>
         </div>
 
         <!-- Profile Form -->
-        <form method="post" action="#" enctype="multipart/form-data" class="text-start">
+        <form method="post" action="logic/profiledatachanges.php" enctype="multipart/form-data" class="text-start">
+            
+            <!--Profile Picture-->
+            <div class="mb-3">
+            <label for="profilePicture" class="form-label fw-semibold">Change Profile Picture</label>
+            <input type="file" id="profilePicture" name="profilePicture"
+             accept="image/jpeg, image/png, image/jpg"
+             class="form-control">
+            </div>
+            <?php if(isset($_SESSION["error"])): ?>
+            <div class="text-center mb-4">
+            <p style='color:red'><?php echo $_SESSION["error"] ?></p>
+            </div>
+            <?php endif; ?>
+            <?php unset($_SESSION["error"]) ?>            
             <!-- Name -->
             <div class="mb-3">
             <label for="name" class="form-label text-uppercase small fw-semibold">Name</label>
@@ -73,7 +83,7 @@ if(!empty($_SESSION['logged_in'])){
 
             <!-- Save Button -->
             <div class="d-grid">
-            <button type="submit" class="btn fw-semibold">Save Changes</button>
+            <button type="submit" name="submit" class="btn fw-semibold">Save Changes</button>
             </div>
         </form>
         </div>
