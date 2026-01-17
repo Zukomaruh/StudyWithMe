@@ -78,30 +78,10 @@ if(!empty($_SESSION['logged_in'])){
 
                         <div class="d-flex align-items-center">
                             <div>
-                                    <?php
-                                    // Default-Profilbild
-                                    $profilePic = "assets/img/defaultpp.jpg";
-
-                                    if (!empty($_SESSION['user_id'])) {
-                                        $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
-                                        $stmt->bind_param("i", $_SESSION['user_id']);
-                                        $stmt->execute();
-                                        $stmt->bind_result($dbProfilePic);
-                                        $stmt->fetch();
-                                        $stmt->close();
-
-                                        $dbProfilePic = substr($dbProfilePic, 3);
-
-                                        if (!empty($dbProfilePic)) {
-                                            $profilePic = $dbProfilePic;
-                                        }
-                                    }
-                                ?>
-
                                 <!-- Profile Picture -->
                                 <div class="d-flex align-items-center gap-3">
                                     <img
-                                        src="<?= htmlspecialchars($profilePic) ?>"
+                                        src="<?= htmlspecialchars(getUserProfilePic($db_obj))?>"
                                         alt="Profile Picture"
                                         class="rounded-circle img-fluid"
                                         style="width: 45px; height: 45px; object-fit: cover;"

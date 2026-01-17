@@ -219,4 +219,25 @@ function sendErrorMessageLocation($error, $location){
     exit;
 }
 
+function getUserProfilePic($db_obj) {
+    $profilePic = "assets/img/defaultpp.jpg";
+
+    if (!empty($_SESSION['user_id'])) {
+        $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $stmt->bind_result($dbProfilePic);
+        $stmt->fetch();
+        $stmt->close();
+
+        $dbProfilePic = substr($dbProfilePic, 3);
+
+        if (!empty($dbProfilePic)) {
+            $profilePic = $dbProfilePic;
+        }
+    }
+
+    return $profilePic;
+}
+
 ?>
