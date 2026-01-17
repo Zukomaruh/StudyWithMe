@@ -7,27 +7,6 @@ closeExpiredStudySessions($db_obj);
 if(!empty($_SESSION['logged_in'])){
   checkRunningSession($db_obj, $_SESSION['user_id']);
 }
-
-//UNBEDINGT AUSLAGERN
-//Profilbild             
-                    // Default-Profilbild
-                    $profilePic = "assets/img/defaultpp.jpg";
-
-                    if (!empty($_SESSION['user_id'])) {
-                        $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
-                        $stmt->bind_param("i", $_SESSION['user_id']);
-                        $stmt->execute();
-                        $stmt->bind_result($dbProfilePic);
-                        $stmt->fetch();
-                        $stmt->close();
-
-                        $dbProfilePic = substr($dbProfilePic, 3);
-
-                        if (!empty($dbProfilePic)) {
-                            $profilePic = $dbProfilePic;
-                        }
-                    }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,10 +83,9 @@ if(!empty($_SESSION['logged_in'])){
             <div class="room-userlist p-3 mb-4 rounded">
 
               <?php
-                //später vllt in functions auslagern!
-                // SQL: alle aktiven Sessions in einem Raum holen
+                // SQL: alle aktiven Sessions in einem Raum holen, inkl. Profilbild
                 $stmt = $db_obj->prepare("
-                    SELECT u.name, s.subject, TIMEDIFF(NOW(), s.start_time) AS duration
+                    SELECT u.name, u.profile_pic, s.subject, TIMEDIFF(NOW(), s.start_time) AS duration
                     FROM study_sessions s
                     JOIN users u ON s.user_id = u.user_id
                     WHERE s.room_id = ? AND s.end_time IS NULL
@@ -115,35 +93,35 @@ if(!empty($_SESSION['logged_in'])){
                 ");
                 $stmt->bind_param("i", $selectedRoomId);
                 $stmt->execute();
-                $stmt->bind_result($userName, $subject, $duration);
-
+                $result = $stmt->get_result();
+                $users = $result->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
 
                 // HTML-Wrapper für die scrollable Liste
                 echo '<div class="room-userlist p-3 mb-4 rounded" style="max-height:400px; overflow-y:auto;">';
+
                 // Schleife über alle aktiven Sessions
-                while ($stmt->fetch()) {
-                    // duration formatieren: Stunden/Minuten/Sekunden
-                    $timeParts = explode(":", $duration); // "HH:MM:SS"
+                foreach ($users as $user) {
+                    $timeParts = explode(":", $user['duration']); // "HH:MM:SS"
                     $timeFormatted = sprintf("%02d:%02d", $timeParts[1], $timeParts[2]);
+                    $profilePic = !empty($user['profile_pic']) ? substr($user['profile_pic'], 3) : "assets/img/defaultpp.jpg";
 
                     // HTML-Block pro User
                     echo '
                     <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
                         <div class="d-flex align-items-center">
                             <img src="'.htmlspecialchars($profilePic).'" alt="Profile" class="profile-pic me-2">
-                            <span class="fw-semibold">' . htmlspecialchars($userName) . '</span>
+                            <span class="fw-semibold">' . htmlspecialchars($user['name']) . '</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <span class="time me-2">' . $timeFormatted . '</span>
-                            <span class="subject-tag">' . htmlspecialchars($subject) . '</span>
+                            <span class="subject-tag">' . htmlspecialchars($user['subject']) . '</span>
                         </div>
                     </div>
                     ';
                 }
 
                 echo '</div>'; // close wrapper
-
-                $stmt->close();
               ?>
 
             </div>
