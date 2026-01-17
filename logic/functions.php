@@ -129,6 +129,7 @@ function checkRunningSession(mysqli $db_obj, int $userId): void {
         unset($_SESSION['active_room_id']);
     }
     // Optional: Wenn keine Session existiert, Session-Variablen auch auf false setzen
+    //vielleicht nicht notwendig
     elseif (!$hasResult) {
         $_SESSION['study_session_active'] = false;
         unset($_SESSION['active_room_id']);

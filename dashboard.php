@@ -25,9 +25,7 @@ if(!empty($_SESSION['logged_in'])){
         </h1>
 
         <?php
-            // Dashboard: Alle aktiven Sessions nach Studiengang mit Laufzeit
-
-            // 1. SQL: Alle aktiven Sessions mit User-Infos holen
+            //Alle aktiven Sessions mit User-Infos holen
             $sql = "
                 SELECT 
                     s.session_id,
@@ -47,7 +45,7 @@ if(!empty($_SESSION['logged_in'])){
 
             $result = $db_obj->query($sql);
 
-            // 2. Sessions nach Studiengang gruppieren
+            //Sessions nach Studiengang gruppieren
             $activeSessions = [];
 
             while ($row = $result->fetch_assoc()) {

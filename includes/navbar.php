@@ -43,9 +43,6 @@
           <li class="nav-item">
             <a class="nav-link" href="login.php">Log In</a>
           </li>
-          <!-- <li class="nav-item"> -->
-            <!-- <a class="nav-link" href="campusmap.php">Campus-Map</a> -->
-          <!-- </li> -->
         <?php elseif(basename($currentPage) === 'createAccount.php'
         or basename($currentPage) === 'login.php') : ?>
           <li class="nav-item">

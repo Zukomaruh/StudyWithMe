@@ -3,7 +3,7 @@ require_once "logic/functions.php";
 require_once "logic/database/dbaccess.php";
 redirectIllegalSiteVisit();
 closeExpiredStudySessions($db_obj);
-//check because of guest
+//check because of guest, checkrunning session checkt ob user eine session am laufen hat
 if(!empty($_SESSION['logged_in'])){
   checkRunningSession($db_obj, $_SESSION['user_id']);
 }
