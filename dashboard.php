@@ -77,8 +77,40 @@ if(!empty($_SESSION['logged_in'])){
                     <div class="user-entry d-flex align-items-center justify-content-between mb-2 p-2 rounded">
 
                         <div class="d-flex align-items-center">
-                            <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="profile-pic me-2">
-                            <span class="fw-semibold"><?= htmlspecialchars($session['user_name']) ?></span>
+                            <div>
+                                    <?php
+                                    // Default-Profilbild
+                                    $profilePic = "assets/img/defaultpp.jpg";
+
+                                    if (!empty($_SESSION['user_id'])) {
+                                        $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
+                                        $stmt->bind_param("i", $_SESSION['user_id']);
+                                        $stmt->execute();
+                                        $stmt->bind_result($dbProfilePic);
+                                        $stmt->fetch();
+                                        $stmt->close();
+
+                                        $dbProfilePic = substr($dbProfilePic, 3);
+
+                                        if (!empty($dbProfilePic)) {
+                                            $profilePic = $dbProfilePic;
+                                        }
+                                    }
+                                ?>
+
+                                <!-- Profile Picture -->
+                                <div class="d-flex align-items-center gap-3">
+                                    <img
+                                        src="<?= htmlspecialchars($profilePic) ?>"
+                                        alt="Profile Picture"
+                                        class="rounded-circle img-fluid"
+                                        style="width: 45px; height: 45px; object-fit: cover;"
+                                    >
+                                    <span class="fw-semibold">
+                                        <?= htmlspecialchars($session['user_name']) ?>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="text-center">
