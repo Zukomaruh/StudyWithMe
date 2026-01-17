@@ -75,11 +75,24 @@
     //----user ID holen für study_session---
     $userId = getUserIdByEmail($db_obj, $email);
 
+    //---- Rolle des Users holen ----
+    $stmt = $db_obj->prepare("
+        SELECT role
+        FROM users
+        WHERE email = ?
+    ");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($role);
+    $stmt->fetch();
+    $stmt->close();
+
     $db_obj->close();
 
     //------Weiterleiten & Session--------
     $_SESSION["logged_in"] = true;
     $_SESSION['user_id'] = $userId;
+    $_SESSION['role'] = $role;
     header("Location: ../campusmap.php");
     exit;
 ?>

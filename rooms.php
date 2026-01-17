@@ -138,7 +138,8 @@ if(!empty($_SESSION['logged_in'])){
                       class="form-control rounded-pill"
                       placeholder="Input..."
                       <?= empty($_SESSION['logged_in']) || empty($selectedRoomId) || !empty($_SESSION['study_session_active']) ? 'disabled' : '' ?>
-                  >
+                      required
+                      >
               </div>
 
               <!-- Study Session Controls -->

@@ -30,6 +30,7 @@ if(!empty($_SESSION['logged_in'])){
             // 1. SQL: Alle aktiven Sessions mit User-Infos holen
             $sql = "
                 SELECT 
+                    s.session_id,
                     u.name AS user_name, 
                     u.course AS user_course, 
                     s.subject, 
@@ -74,25 +75,42 @@ if(!empty($_SESSION['logged_in'])){
                         $interval = $start->diff($now);
                         $elapsedTime = sprintf('%02d:%02d', $interval->h*60 + $interval->i, $interval->s);
                     ?>
+
                     <div class="user-entry d-flex align-items-center justify-content-between mb-2 p-2 rounded">
+
                         <div class="d-flex align-items-center">
                             <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="profile-pic me-2">
                             <span class="fw-semibold"><?= htmlspecialchars($session['user_name']) ?></span>
                         </div>
+
                         <div class="text-center">
                             <span class="subject-tag"><?= htmlspecialchars($session['subject']) ?></span>
                         </div>
-                        <div class="d-flex flex-column align-items-end">
-                            <span class="fw-semibold"><?= $roomName ?></span>
-                            <span class="text-muted"><?= $elapsedTime ?></span>
+
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex flex-column align-items-end">
+                                <span class="fw-semibold"><?= $roomName ?></span>
+                                <span class="text-muted"><?= $elapsedTime ?></span>
+                            </div>
+
+                            <?php if (!empty($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <form method="post" action="logic/admin_stop_session.php" class="ms-2">
+                                    <input type="hidden" name="session_id" value="<?= $session['session_id'] ?>">
+                                    <button type="submit" class="btn stopsession">
+                                        Stop
+                                    </button>
+                                </form>
+                            <?php endif; ?>
                         </div>
+
                     </div>
+                    
                     <?php endforeach; ?>
+                    
                 </section>
                 <?php
             }
             ?>
-        
     </main>
     <?php include 'includes/footer.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
