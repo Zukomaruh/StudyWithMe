@@ -76,17 +76,9 @@
     $userId = getUserIdByEmail($db_obj, $email);
 
     //---- Rolle des Users holen ----
-    $stmt = $db_obj->prepare("
-        SELECT role
-        FROM users
-        WHERE email = ?
-    ");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->bind_result($role);
-    $stmt->fetch();
-    $stmt->close();
+    $role = getUserRoleByEmail($db_obj, $email);
 
+    //------DB schließen-----
     $db_obj->close();
 
     //------Weiterleiten & Session--------
