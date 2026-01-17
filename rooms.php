@@ -7,6 +7,27 @@ closeExpiredStudySessions($db_obj);
 if(!empty($_SESSION['logged_in'])){
   checkRunningSession($db_obj, $_SESSION['user_id']);
 }
+
+//UNBEDINGT AUSLAGERN
+//Profilbild             
+                    // Default-Profilbild
+                    $profilePic = "assets/img/defaultpp.jpg";
+
+                    if (!empty($_SESSION['user_id'])) {
+                        $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
+                        $stmt->bind_param("i", $_SESSION['user_id']);
+                        $stmt->execute();
+                        $stmt->bind_result($dbProfilePic);
+                        $stmt->fetch();
+                        $stmt->close();
+
+                        $dbProfilePic = substr($dbProfilePic, 3);
+
+                        if (!empty($dbProfilePic)) {
+                            $profilePic = $dbProfilePic;
+                        }
+                    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,9 +117,9 @@ if(!empty($_SESSION['logged_in'])){
                 $stmt->execute();
                 $stmt->bind_result($userName, $subject, $duration);
 
+
                 // HTML-Wrapper für die scrollable Liste
                 echo '<div class="room-userlist p-3 mb-4 rounded" style="max-height:400px; overflow-y:auto;">';
-
                 // Schleife über alle aktiven Sessions
                 while ($stmt->fetch()) {
                     // duration formatieren: Stunden/Minuten/Sekunden
@@ -109,7 +130,7 @@ if(!empty($_SESSION['logged_in'])){
                     echo '
                     <div class="room-user d-flex justify-content-between align-items-center mb-2 p-2 rounded">
                         <div class="d-flex align-items-center">
-                            <img src="assets/img/defaultpp.jpg" alt="Profile" class="profile-pic me-2">
+                            <img src="'.htmlspecialchars($profilePic).'" alt="Profile" class="profile-pic me-2">
                             <span class="fw-semibold">' . htmlspecialchars($userName) . '</span>
                         </div>
                         <div class="d-flex align-items-center">
