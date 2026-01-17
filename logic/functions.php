@@ -32,6 +32,21 @@ function getUserIdByEmail(mysqli $db_obj, string $email): int {
     return $userId;
 }
 
+function getUserRoleByEmail(mysqli $db_obj, string $email): string{
+    $stmt = $db_obj->prepare("
+        SELECT role
+        FROM users
+        WHERE email = ?
+    ");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->bind_result($role);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $role;
+}
+
 function startStudySession(
     mysqli $db_obj,
     int $userId,
