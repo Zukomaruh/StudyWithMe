@@ -197,4 +197,10 @@ function getUSerData(mysqli $db_obj, int $user_id): array{
     return $user_data ?: ['name' => '', 'email' => '', 'course' => ''];
 }
 
+function sendErrorMessageLocation($error, $location){
+    $_SESSION["error"] = $error;
+    header($location);
+    exit;
+}
+
 ?>
