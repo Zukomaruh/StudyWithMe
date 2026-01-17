@@ -24,9 +24,9 @@
             $stmt->bind_param("si", $target_file, $_SESSION['user_id']);
             $stmt->execute();
             $stmt->close();
-            sendErrorMessageLocation("file was uploaded", "Location: ../profile.php");
+            //sendErrorMessageLocation("file was uploaded", "Location: ../profile.php");
         }else{
-            sendErrorMessageLocation("Error with file upload", "Location: ../profile.php");
+            //sendErrorMessageLocation("Error with file upload", "Location: ../profile.php");
         }
     }
 ?>

@@ -24,10 +24,35 @@ if(!empty($_SESSION['logged_in'])){
         <div class="col-md-6 text-center">
         <h1 class="fw-bold mb-4">Your Profile</h1>
 
-        <!-- Profile Picture -->
-        <div class="mb-4">
-            <img src="assets/img/defaultpp.jpg" alt="Profile Picture" class="rounded-circle mb-3 img-fluid" style="max-width: 150px;">
-        </div>
+        <?php
+            // Default-Profilbild
+            $profilePic = "assets/img/defaultpp.jpg";
+
+            if (!empty($_SESSION['user_id'])) {
+                $stmt = $db_obj->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
+                $stmt->bind_param("i", $_SESSION['user_id']);
+                $stmt->execute();
+                $stmt->bind_result($dbProfilePic);
+                $stmt->fetch();
+                $stmt->close();
+
+                $dbProfilePic = substr($dbProfilePic, 3);
+
+                if (!empty($dbProfilePic)) {
+                    $profilePic = $dbProfilePic;
+                }
+            }
+        ?>
+
+    <!-- Profile Picture -->
+    <div class="mb-4">
+        <img
+            src="<?= htmlspecialchars($profilePic) ?>"
+            alt="Profile Picture"
+            class="rounded-circle mb-3 img-fluid"
+            style="max-width: 150px;"
+        >
+    </div>
 
         <!-- Profile Form -->
         <form method="post" action="logic/profiledatachanges.php" enctype="multipart/form-data" class="text-start">
