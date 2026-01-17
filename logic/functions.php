@@ -173,7 +173,7 @@ function stopStudySessionBySessionId(mysqli $db, int $sessionId): void
 }
 
 function redirectIllegalSiteVisit() {
-    if(!$_SESSION['logged_in'] && !$_SESSION['guest']){
+    if(!isset($_SESSION['logged_in']) && !isset($_SESSION['guest'])){
         header("Location: index.php");
         exit;
     }
