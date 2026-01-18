@@ -36,7 +36,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
         <?php if (basename($currentPage) === 'index.php' 
-        or basename($currentPage) === 'privacystatement.php') : ?>
+        or basename($currentPage) === 'privacystatement.php'
+        or basename($currentPage) === 'copyright.php'
+        or basename($currentPage) === 'impressum.php') : ?>
           <li class="nav-item">
             <a class="nav-link" href="createAccount.php">Register</a>
           </li>
