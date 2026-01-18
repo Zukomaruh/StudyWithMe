@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start(); 
+      $email = '';
+      if(isset($_COOKIE['remember_user'])){
+        $email = $_COOKIE['remember_user'];
+      }
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -30,7 +35,7 @@
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label text-uppercase small fw-semibold">FHTW-E-Mail</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="enter your email..." required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="enter your email..." value ="<?php echo htmlspecialchars($email) ?>"  required>
         </div>
 
         <!-- Password -->
@@ -39,9 +44,10 @@
           <input type="password" id="password" name="password" class="form-control" placeholder="enter your password..." required>
         </div>
 
-        <!-- Forgot Password -->
-        <div class="text-start mb-4">
-          <a href="#" class="small privacy-link">Forgot password?</a>
+        <!-- Remember Me -->
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" <?php echo isset($_COOKIE['remember_user']) ? 'checked' : ''; ?>>
+          <label class="form-check-label small" for="rememberMe">remember me</label>
         </div>
 
         <?php if(isset($_SESSION["error"])): ?>

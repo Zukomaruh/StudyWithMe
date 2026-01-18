@@ -20,11 +20,38 @@
 
     $email = trim($_POST["email"]) ?? "";
     $password = trim($_POST["password"]) ?? "";
+    $rememberMe = isset($_POST['rememberMe']);
 
     //------Eingabevalidierung------
     $email === "" && sendErrorMessage("Please enter your email");
     !filter_var($email, FILTER_VALIDATE_EMAIL) && sendErrorMessage("Please enter a valid email");
     $password === "" && sendErrorMessage("Please enter your password");
+
+    
+
+    //-------Cookie Setzen---------
+    if($rememberMe){
+        setcookie("remember_user", $email, [
+            "expires" => time() + 3600 * 24 * 30, 
+            "path" => "/",
+            "domain" => "", 
+            "secure" => false, 
+            "httponly" => true,
+            "samesite" => "Strict"
+        ]);
+    }else{
+        if(isset($_COOKIE['remember_user'])){
+            setcookie("remember_user", $email, [
+                "expires" => time() - 3600 * 24 * 30,
+                "path" => "/",
+                "domain" => "",
+                "secure" => false,
+                "httponly" => true,
+                "samesite" => "Strict"
+            ]);
+            unset($_COOKIE['remember_user']);
+        }
+    }
                 
    //------DB-Abfrage: Existiert die Email?-----
     $stmt = $db_obj->prepare("SELECT password, name FROM users WHERE email = ?");
